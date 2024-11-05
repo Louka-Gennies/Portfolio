@@ -1,47 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+  font-family: Outfit;
+  background: #f3fafc;
+  margin: 0;
 }
 
-header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
+.thumb-up svg {
+  height: 70px;
+  width: auto;
+  margin-bottom: 50px;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-section {
-    padding: 20px;
-    margin: 20px;
+.social-svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transition: all 0.3s ease;
 }
 
-.project {
-    margin-bottom: 20px;
+.social-svg svg {
+    height: 30px;
+    width: auto;
+    fill: #646464;
+    padding: 10px;
+    transition: all 0.3s ease;
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background: #333;
+.social-svg:hover svg{
+    fill: #00043a;
+}
+
+.social-svg:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.button-svg svg {
+  height: 30px;
+  width: auto;
+  fill: #1623d8;
+  padding: 10px;
+}
+
+.button-svg {
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.content h1 {
+    font-size: 70px;
+    color: #1623d8;
+    margin: 2% 0 5% 0;
+    
+}
+
+.content h2 {
+    font-size: 40px;
+    color: #00043a;
+    margin: 0 0 0 0;
+}
+
+.content p {
+    font-size: 25px;
+    color: #6d6d6d;
+    margin: 0 0 0 0;
+}
+
+.content button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
     color: #fff;
+    background: #00043a;
+    border: none;
+    padding: 10px 40px 10px 10px;
+    border-radius: 100px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2%;
+}
+
+.content button:hover {
+    background: #00065c;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    margin-top: auto;
+    padding-bottom: 50px;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    color: #00043a;
+    flex-direction: column;
 }
