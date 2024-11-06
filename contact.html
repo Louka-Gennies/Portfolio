@@ -10,10 +10,11 @@
     <div class="container">
         <div class="content">
             <h2>Contact Me</h2>
-            <form class="contact-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
+            <form action="https://formspree.io/f/mvgoazoe" method="POST" class="contact-form">
+                <input type="text" name="first-name"  placeholder="First Name">
+                <input type="text" name="last-name"  placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
                 <button type="submit">Send Message</button>
             </form>
         </div>
