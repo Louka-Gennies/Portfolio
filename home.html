@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LG / Accueil</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&display=swap');
+
+        /* Définition des couleurs principales utilisées sur la page */
+        :root {
+            --royal-blue: #3543e4;
+            --white: #F6F2E6;
+            --light-gray: #bebcb3;;
+            --gray: #4c4c4c;
+            --black: #111111;
+            --nav-bg: #191919;
+        }
+
+        /* Styles de base pour réinitialiser les marges, les paddings et la taille du box */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Application du style de police et configuration de la hauteur de page et du fond */
+        body, html {
+            height: 100%;
+            font-family: Host Grotesk, sans-serif;
+            overflow: hidden;
+            scroll-behavior: smooth;
+            background-color: var(--black);
+        }
+        
+        /* Style de l'écran d'introduction (qui couvre toute la page au début) */
+        #intro-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--black); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 1000; 
+            transition: transform 1s ease; 
+        }
+
+        /* Style pour l'animation d'apparition du texte */
+        .text-appear span {
+            font-size: 70px;
+            font-weight: 800;
+            opacity: 0;
+            display: inline-block;
+            transform: translateY(20px); 
+            animation: slideUpText 0.5s forwards; 
+        }
+
+        /* Définition de l'animation de défilement du texte */
+        @keyframes slideUpText {
+            0% {
+                opacity: 0;
+                transform: translateY(20px); 
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); 
+            }
+        }
+
+        /* Style de la barre de navigation qui est fixée en haut de la page */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 500; 
+        }
+
+        /* Style du logo rond avec le texte "LG" */
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--white);
+            background-color: var(--nav-bg);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Taille du texte à l'intérieur du logo */
+        .logo span {
+            font-size: 18px;
+        }
+
+        /* Position du copyright dans le coin supérieur droit du logo */
+        .logo .copyright {
+            position: absolute;
+            top: 5px;
+            right: 7px;
+            font-size: 10px;
+            color: var(--white);
+        }
+
+        /* Styles pour les liens de navigation dans la navbar */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 5px 20px;
+            height: 50px;
+            border-radius: 20px;
+            background-color: var(--nav-bg);
+        }
+
+        /* Style des liens de navigation */
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative; 
+            padding-left: 25px; /* Espace pour le point à gauche */
+        }
+
+        /* Style des liens au survol */
+        .nav-links a:hover {
+            color: var(--light-gray);
+        }
+
+        /* Ajout du point à gauche du lien actif */
+        .nav-links a.active::before {
+            content: '';
+            position: absolute;
+            left: 5px; /* Position du point */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--royal-blue);
+        }
+
+        /* Style de la section principale du contenu de la page */
+        .content {
+            margin-top: 80px; 
+            padding: 20px;
+            height: 2000px; 
+        }
+
+        /* style de la classe pour que le texte soit en bleu */
+        .blue-letter {
+            color: var(--royal-blue); 
+        }
+    </style>
+</head>
+<body>
+    <!-- Écran d'introduction (affiché au début de la page) -->
+    <div id="intro-screen">
+        <h1 class="text-appear">
+            <span >L</span><span>O</span><span>U</span><span>K</span><span>A</span>
+            <span>&nbsp;</span>
+            <span>G</span><span class="blue-letter">E</span><span>N</span><span>N</span><span>I</span><span class="blue-letter">E</span><span>S</span>
+        </h1>
+    </div>
+
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <!-- Logo rond avec "LG" et copyright -->
+        <div class="logo" onclick="scrollToTop()">
+            <span>LG</span>
+            <span class="copyright">©</span> <!-- Copyright en petit -->
+        </div>
+        
+        <!-- Liens de navigation -->
+        <div class="nav-links">
+            <a href="#home" id="home-link">Accueil</a>
+            <a href="#projects" id="projects-link">Projets</a>
+            <a href="#about" id="about-link">À Propos</a>
+            <a href="#contact" id="contact-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Contenu de la page principale -->
+    <div class="content">
+        <h1>Bienvenue sur mon site</h1>
+        <p>Contenu de la page...</p>
+    </div>
+    
+    <script>
+        // Délai pour l'apparition de chaque lettre dans le texte d'introduction
+        const letters = document.querySelectorAll(".text-appear span");
+        letters.forEach((letter, index) => {
+            letter.style.animationDelay = `${index * 0.1}s`; // Délai entre chaque lettre
+        });
+
+        // Fonction pour faire glisser l'écran d'introduction vers le haut
+        function slideUpIntroScreen() {
+            const introScreen = document.getElementById("intro-screen");
+            introScreen.style.transform = "translateY(-100%)";
+        }
+
+        // Attendre la fin de l'animation de texte avant de faire disparaître l'écran d'introduction
+        setTimeout(slideUpIntroScreen, letters.length * 100 + 1500); // Temps total de l'animation + 1s et demi
+
+        // Fonction pour gérer l'état actif des liens de navigation
+        function setActivePage() {
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                if (window.location.hash === link.getAttribute('href')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Événement pour mettre à jour l'élément actif lors du changement d'URL
+        window.addEventListener('hashchange', setActivePage);
+
+        // Initialisation de l'état actif lors du chargement de la page
+        window.addEventListener('load', setActivePage);
+    </script>
+
+    <script>
+        // Fonction pour faire défiler la page vers le haut lorsqu'on clique sur le logo
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
