@@ -4,188 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LG / Accueil</title>
+    <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./src/css/style.css"></noscript>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&display=swap');
-
-        /* Définition des couleurs principales utilisées sur la page */
-        :root {
-            --royal-blue: #3543e4;
-            --white: #F6F2E6;
-            --light-gray: #bebcb3;;
-            --gray: #4c4c4c;
-            --black: #111111;
-            --nav-bg: #191919;
-        }
-
-        /* Styles de base pour réinitialiser les marges, les paddings et la taille du box */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Application du style de police et configuration de la hauteur de page et du fond */
-        body, html {
-            height: 100%;
-            font-family: Host Grotesk, sans-serif;
-            overflow: hidden;
-            scroll-behavior: smooth;
-            background-color: var(--black);
-        }
-        
-        /* Style de l'écran d'introduction (qui couvre toute la page au début) */
-        #intro-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--black); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            z-index: 1000; 
-            transition: transform 1s ease; 
-        }
-
-        /* Style pour l'animation d'apparition du texte */
-        .text-appear span {
-            font-size: 70px;
-            font-weight: 800;
-            opacity: 0;
-            display: inline-block;
-            transform: translateY(20px); 
-            animation: slideUpText 0.5s forwards; 
-        }
-
-        /* Définition de l'animation de défilement du texte */
-        @keyframes slideUpText {
-            0% {
-                opacity: 0;
-                transform: translateY(20px); 
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0); 
-            }
-        }
-
-        /* Style de la barre de navigation qui est fixée en haut de la page */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 500; 
-        }
-
-        /* Style du logo rond avec le texte "LG" */
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--white);
-            background-color: var(--nav-bg);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-        }
-
-        /* Taille du texte à l'intérieur du logo */
-        .logo span {
-            font-size: 18px;
-        }
-
-        /* Position du copyright dans le coin supérieur droit du logo */
-        .logo .copyright {
-            position: absolute;
-            top: 5px;
-            right: 7px;
-            font-size: 10px;
-            color: var(--white);
-        }
-
-        /* Styles pour les liens de navigation dans la navbar */
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 5px 20px;
-            height: 50px;
-            border-radius: 20px;
-            background-color: var(--nav-bg);
-        }
-
-        /* Style des liens de navigation */
-        .nav-links a {
-            text-decoration: none;
-            color: var(--white);
-            font-size: 18px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative; 
-            padding-left: 25px; /* Espace pour le point à gauche */
-        }
-
-        /* Style des liens au survol */
-        .nav-links a:hover {
-            color: var(--light-gray);
-        }
-
-        /* Ajout du point à gauche du lien actif */
-        .nav-links a.active::before {
-            content: '';
-            position: absolute;
-            left: 5px; /* Position du point */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--royal-blue);
-        }
-
-        /* Style de la section principale du contenu de la page */
-        .content {
-            margin-top: 80px; 
-            padding: 20px;
-            height: 2000px; 
-        }
-
-        /* style de la classe pour que le texte soit en bleu */
-        .blue-letter {
-            color: var(--royal-blue); 
+        /* Styles critiques pour éviter le FOUC */
+        body.hidden {
+            visibility: hidden;
         }
     </style>
 </head>
-<body>
-    <!-- Écran d'introduction (affiché au début de la page) -->
+<body class="hidden">
+    <!-- Écran d'introduction -->
     <div id="intro-screen">
         <h1 class="text-appear">
-            <span >L</span><span>O</span><span>U</span><span>K</span><span>A</span>
+            <span>L</span><span>O</span><span>U</span><span>K</span><span>A</span>
             <span>&nbsp;</span>
             <span>G</span><span class="blue-letter">E</span><span>N</span><span>N</span><span>I</span><span class="blue-letter">E</span><span>S</span>
         </h1>
     </div>
 
+    <!-- Fond animé avec Three.js -->
+    <div class="background">
+        <canvas id="canvas"></canvas>
+        <script type="module">
+            import * as T from './src/js/three.module.min.js';
+            import { OrbitControls } from './src/js/OrbitControls.js';
+            import fragmentShader from './src/shaders/fragment.js';
+            import vertexShader from './src/shaders/vertex.js';
+            import { DotScreenShader } from './src/js/customShader.js';
+            import { EffectComposer } from './src/js/EffectComposer.js';
+            import { RenderPass } from './src/js/RenderPass.js';
+            import { ShaderPass } from './src/js/ShaderPass.js';
+
+            const device = {
+                width: window.innerWidth,
+                height: window.innerHeight,
+                pixelRatio: window.devicePixelRatio
+            };
+
+            class Three {
+                constructor(canvas) {
+                    this.canvas = canvas;
+                    this.time = 0;
+                    this.scene = new T.Scene();
+
+                    this.camera = new T.PerspectiveCamera(
+                        75,
+                        device.width / device.height,
+                        0.1,
+                        100
+                    );
+                    this.camera.position.set(0, 0, 1.3);
+                    this.scene.add(this.camera);
+
+                    this.renderer = new T.WebGLRenderer({
+                        canvas: this.canvas,
+                        alpha: true,
+                        antialias: true,
+                        preserveDrawingBuffer: true
+                    });
+                    this.renderer.setSize(device.width, device.height);
+                    this.renderer.setPixelRatio(Math.min(device.pixelRatio, 2));
+
+                    this.renderer.setClearColor(0x333333, 1);
+
+                    this.controls = new OrbitControls(this.camera, this.canvas);
+                    this.controls.enableZoom = false;
+                    this.controls.enableRotate = false;
+                    this.controls.enablePan = false;
+                    this.clock = new T.Clock();
+
+                    this.initPost();
+                    this.setLights();
+                    this.setGeometry();
+                    this.render();
+                    this.setResize();
+                }
+
+                initPost() {
+                    this.composer = new EffectComposer(this.renderer);
+                    this.composer.addPass(new RenderPass(this.scene, this.camera));
+
+                    const effect1 = new ShaderPass(DotScreenShader);
+                    effect1.uniforms['scale'].value = 4;
+                    this.composer.addPass(effect1);
+                }
+
+                setLights() {
+                    this.ambientLight = new T.AmbientLight(0xffffff, 0.5);
+                    this.scene.add(this.ambientLight);
+                }
+
+                setGeometry() {
+                    this.planeGeometry = new T.SphereGeometry(1.5, 32, 32);
+                    this.planeMaterial = new T.ShaderMaterial({
+                        side: T.DoubleSide,
+                        wireframe: false,
+                        fragmentShader: fragmentShader,
+                        vertexShader: vertexShader,
+                        uniforms: {
+                            time: { value: 0 }
+                        }
+                    });
+
+                    this.planeMesh = new T.Mesh(this.planeGeometry, this.planeMaterial);
+                    this.scene.add(this.planeMesh);
+                }
+
+                render() {
+                    this.time += 0.001;
+                    this.planeMaterial.uniforms.time.value = this.time;
+                    requestAnimationFrame(this.render.bind(this));
+                    this.composer.render();
+                }
+
+                setResize() {
+                    window.addEventListener('resize', () => {
+                        device.width = window.innerWidth;
+                        device.height = window.innerHeight;
+
+                        this.camera.aspect = device.width / device.height;
+                        this.camera.updateProjectionMatrix();
+
+                        this.renderer.setSize(device.width, device.height);
+                        this.renderer.setPixelRatio(Math.min(device.pixelRatio, 2));
+
+                        this.composer.setSize(device.width, device.height);
+                    });
+                }
+            }
+
+            window.addEventListener('load', () => {
+                const canvas = document.querySelector('#canvas');
+                if (canvas) {
+                    new Three(canvas);
+                }
+            });
+        </script>
+    </div>
+
     <!-- Barre de navigation -->
     <nav class="navbar">
-        <!-- Logo rond avec "LG" et copyright -->
         <div class="logo" onclick="scrollToTop()">
             <span>LG</span>
-            <span class="copyright">©</span> <!-- Copyright en petit -->
+            <span class="copyright">©</span>
         </div>
-        
-        <!-- Liens de navigation -->
         <div class="nav-links">
             <a href="#home" id="home-link">Accueil</a>
             <a href="#projects" id="projects-link">Projets</a>
@@ -194,55 +157,153 @@
         </div>
     </nav>
 
-    <!-- Contenu de la page principale -->
-    <div class="content">
-        <h1>Bienvenue sur mon site</h1>
-        <p>Contenu de la page...</p>
+    <!-- Conteneur principal -->
+    <div class="container">
+        <div class="content">
+            <div class="word-slider">
+                <div class="word">Créatif</div>
+                <div class="word">Innovant</div>
+                <div class="word">Passionné</div>
+            </div>
+
+            <div class="name-title">
+                <div class="name">
+                    <h1>LOUKA</h1>
+                </div>
+
+                <div class="name">
+                    <h1>G</h1>
+                    <h1 class="blue-letter">E</h1>
+                    <h1>NNI</h1>
+                    <h1 class="blue-letter">E</h1>
+                    <h1>S</h1>
+                </div>
+            </div>
+
+            <div class="scroll-icon">
+                <div>Scroll</div>
+                <div class="chevron">
+                    <span>&#x276F;</span>
+                    <span>&#x276F;</span>
+                </div>
+            </div>
+
+            <div class="spacer"></div>
+        </div>
+
+        <div class="bio-section">
+          <div class="bio">
+            <p>
+              "Engagé et à l’écoute, je suis toujours prêt à approfondir mes compétences en développement web. Mon expérience m’a permis de contribuer à des projets variés, principalement axés sur le développement de sites et plateformes web, avec un intérêt marqué pour l’amélioration continue des interfaces et des fonctionnalités."
+            </p>
+            <p>
+              "Curieux et adaptable, je reste à jour sur les avancées technologiques pour enrichir constamment mon expertise. J’apprécie le travail en équipe tout en sachant être autonome pour mener les projets à bien de manière efficace et rigoureuse."
+            </p>
+          </div>
+
+          <div class="competences">
+            <h2>COMPÉTENCES</h2>
+            <div class="competence-category" onclick="toggleDescription('web', this)">
+                <h3><span class="chevron">&#x276F;</span> Web</h3>
+                <p id="web" class="description hidden">
+                    Passionné par le développement informatique, je possède une bonne expérience en développement, avec une spécialisation marquée en front-end. Étant passionné par le développement web, je reste curieux et enthousiaste d'apprendre et d'explorer de nouveaux domaines, que ce soit dans le développement logiciel, mobile ou web.
+                </p>
+            </div>
+            <div class="competence-category" onclick="toggleDescription('mobile', this)">
+                <h3><span class="chevron">&#x276F;</span> Mobile</h3>
+                <p id="mobile" class="description hidden">
+                    Passionné par le développement informatique, je possède une bonne expérience en développement, avec une spécialisation marquée en front-end. Étant passionné par le développement web, je reste curieux et enthousiaste d'apprendre et d'explorer de nouveaux domaines, que ce soit dans le développement logiciel, mobile ou web.
+                </p>
+            </div>
+            <div class="competence-category" onclick="toggleDescription('software', this)">
+                <h3><span class="chevron">&#x276F;</span> Logiciel</h3>
+                <p id="software" class="description hidden">
+                    Passionné par le développement informatique, je possède une bonne expérience en développement, avec une spécialisation marquée en front-end. Étant passionné par le développement web, je reste curieux et enthousiaste d'apprendre et d'explorer de nouveaux domaines, que ce soit dans le développement logiciel, mobile ou web.
+                </p>
+            </div>
+          </div>
+        </div>
     </div>
-    
-    <script>
-        // Délai pour l'apparition de chaque lettre dans le texte d'introduction
-        const letters = document.querySelectorAll(".text-appear span");
-        letters.forEach((letter, index) => {
-            letter.style.animationDelay = `${index * 0.1}s`; // Délai entre chaque lettre
-        });
-
-        // Fonction pour faire glisser l'écran d'introduction vers le haut
-        function slideUpIntroScreen() {
-            const introScreen = document.getElementById("intro-screen");
-            introScreen.style.transform = "translateY(-100%)";
-        }
-
-        // Attendre la fin de l'animation de texte avant de faire disparaître l'écran d'introduction
-        setTimeout(slideUpIntroScreen, letters.length * 100 + 1500); // Temps total de l'animation + 1s et demi
-
-        // Fonction pour gérer l'état actif des liens de navigation
-        function setActivePage() {
-            const links = document.querySelectorAll('.nav-links a');
-            links.forEach(link => {
-                if (window.location.hash === link.getAttribute('href')) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
-
-        // Événement pour mettre à jour l'élément actif lors du changement d'URL
-        window.addEventListener('hashchange', setActivePage);
-
-        // Initialisation de l'état actif lors du chargement de la page
-        window.addEventListener('load', setActivePage);
-    </script>
 
     <script>
-        // Fonction pour faire défiler la page vers le haut lorsqu'on clique sur le logo
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
+      if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+      }
+
+      window.addEventListener('load', () => {
+          document.body.classList.remove('hidden');
+          window.scrollTo(0, 0); // Assure que la page commence en haut
+      });
+
+      const letters = document.querySelectorAll(".text-appear span");
+      letters.forEach((letter, index) => {
+          letter.style.animationDelay = `${index * 0.1}s`;
+      });
+
+      function slideUpIntroScreen() {
+          const introScreen = document.getElementById("intro-screen");
+          introScreen.style.transform = "translateY(-100%)";
+      }
+
+      setTimeout(slideUpIntroScreen, letters.length * 100 + 1500);
+
+      function setActivePage() {
+          const links = document.querySelectorAll('.nav-links a');
+          links.forEach(link => {
+              if (window.location.hash === link.getAttribute('href')) {
+                  link.classList.add('active');
+              } else {
+                  link.classList.remove('active');
+              }
+          });
+      }
+
+      window.addEventListener('hashchange', setActivePage);
+      window.addEventListener('load', setActivePage);
+
+      window.addEventListener('scroll', () => {
+          const scrollPosition = window.scrollY;
+          const nameTitle = document.querySelector('.name-title');
+          const background = document.querySelector('.background');
+          const wordSlider = document.querySelector('.word-slider');
+          const scrollIcon = document.querySelector('.scroll-icon');
+
+          // Calculer le facteur de zoom basé sur la position de défilement
+          const zoomFactor = 1 + scrollPosition / 1000; // Ajustez le diviseur pour contrôler la sensibilité
+
+          nameTitle.style.transform = `scale(${zoomFactor})`;
+
+          if (zoomFactor > 2) {
+              nameTitle.style.transform = 'scale(2)';
+          }
+
+          if (scrollPosition > 0) {
+              background.classList.add('faded');
+              wordSlider.classList.add('hidden');
+              scrollIcon.classList.add('hidden');
+          } else {
+              nameTitle.style.transform = 'scale(1)';
+              background.classList.remove('faded');
+              wordSlider.classList.remove('hidden');
+              scrollIcon.classList.remove('hidden');
+          }
+      });
+
+      function scrollToTop() {
+          window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+          });
+      }
+
+      function toggleDescription(id, element) {
+        const description = document.getElementById(id);
+        description.classList.toggle('hidden');
+        
+        // Tourner le chevron
+        const chevron = element.querySelector('.chevron');
+        chevron.classList.toggle('rotated');
+      }
     </script>
 </body>
 </html>

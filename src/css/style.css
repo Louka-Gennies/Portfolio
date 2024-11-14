@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=League+Gothic&display=swap');
+
+/* Définition des couleurs principales */
+:root {
+    --royal-blue: #4a88fc;
+    --white: #F6F2E6;
+    --light-gray: #bebcb3;
+    --gray: #4c4c4c;
+    --black: #111111;
+    --nav-bg: #191919;
+}
+
+/* Réinitialisation des styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100vw;
+    font-family: 'Host Grotesk', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    background-color: var(--black);
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.background.faded {
+    opacity: 0;
+}
+
+#intro-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    z-index: 1000;
+    transition: transform 1s ease;
+}
+
+.text-appear span {
+    font-size: 70px;
+    font-weight: 800;
+    opacity: 0;
+    display: inline-block;
+    transform: translateY(20px);
+    animation: slideUpText 0.5s forwards;
+}
+
+@keyframes slideUpText {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navbar {
+    position: fixed;
+    width: 100vw;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 900;
+    padding: 5% 8% 0 8%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--white);
+    background-color: var(--nav-bg);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.logo span {
+    font-size: 18px;
+}
+
+.logo .copyright {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    font-size: 10px;
+    color: var(--white);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px 20px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: var(--nav-bg);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-left: 25px;
+}
+
+.nav-links a:last-child {
+    padding-right: 25px;
+}
+
+.nav-links a:hover {
+    color: var(--light-gray);
+}
+
+.nav-links a.active::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--royal-blue);
+}
+
+.blue-letter {
+    color: var(--royal-blue);
+}
+
+.container {
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    z-index: 400;
+    margin: 0;
+    padding: 3% 8% 0 8%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    padding: 0;
+    margin: 0;
+}
+
+.name-title {
+    position: absolute;
+    bottom: 100px;
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    width: calc(100vw - 16%); /* Correspond à la largeur de .container */
+    left: 8%; /* Aligne .name-title avec .container */
+}
+
+.name-title.zoomed {
+    transform: scale(1.5);
+}
+
+.name-title.description.hidden {
+    opacity: 0;
+}
+
+.name-title h1 {
+    font-family: 'League Gothic';
+    font-size: 18.4vw; /* Utilisation des unités de vue pour une taille de police responsive */
+    font-weight: 800;
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.scroll-icon {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    color: var(--white);
+    transition: opacity 0.5s ease;
+}
+
+.scroll-icon.hidden {
+    opacity: 0;
+}
+
+.scroll-icon div {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.scroll-icon .chevron {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    animation: bounce 2s infinite;
+}
+
+.scroll-icon .chevron span {
+    display: inline-block;
+    font-size: 20px;
+    transform: rotate(90deg);
+    margin-bottom: -5px;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.word-slider {
+    position: absolute;
+    left: 8.5%;
+    bottom: 50%;
+    overflow: hidden;
+    height: 50px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.word-slider.hidden {
+    opacity: 0;
+}
+
+.word-slider .word {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 50px;
+    position: absolute;
+    width: auto;
+    height: auto;
+    animation: slide 15s infinite;
+    color: var(--light-gray);
+    opacity: 0;
+    transform: translateY(20px);
+    text-align: left;
+}
+
+.word-slider .word:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.word-slider .word:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.word-slider .word:nth-child(3) {
+    animation-delay: 10s;
+}
+
+@keyframes slide {
+    0%, 20% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    25%, 45% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50%, 100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.spacer {
+    min-height: 100vh; /* Assure que l'élément prend au moins la hauteur de la fenêtre */
+    width: 100%; /* Assure que l'élément prend toute la largeur disponible */
+    background-color: transparent; /* Optionnel : définit une couleur de fond si nécessaire */
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    color: var(--light-gray);
+    text-align: left;
+    font-family: 'Host Grotesk', sans-serif;
+    gap : 30px;
+    margin-bottom: 150px;
+}
+
+.bio p {
+    font-size: 30px;
+    max-width: 75%;
+    line-height: 1.5;
+}
+
+.competences {
+    color: var(--white);
+    font-family: 'Host Grotesk', sans-serif;;
+}
+
+.competences h2 {
+    font-family: 'League Gothic';
+    font-size: 150px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.competences h3 {
+    font-family: 'League Gothic';
+    font-size: 100px;
+    font-weight: 800;
+}
+
+.competences p {
+    font-size: 25px;
+    max-width: 50%;
+    line-height: 1.5;
+}
+
+.competence-category {
+    border-top: var(--light-gray);
+    border-width: 1px;
+    border-top-style: solid;
+    margin-bottom: 10px;
+}
+
+
+.description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.description.hidden {
+    max-height: 0;
+}
+
+.description:not(.hidden) {
+    max-height: 300px; /* Adjust this value based on the content size */
+}
+
+.competences .chevron {
+    display: inline-block;
+    color: var(--royal-blue);
+    transition: transform 0.3s ease;
+}
+
+.competences .chevron.rotated {
+    transform: rotate(90deg); /* Tourner vers le bas */
+}
