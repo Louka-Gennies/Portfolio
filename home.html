@@ -6,12 +6,6 @@
     <title>LG / Accueil</title>
     <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="./src/css/style.css"></noscript>
-    <style>
-        /* Styles critiques pour éviter le FOUC */
-        body.hidden {
-            visibility: hidden;
-        }
-    </style>
 </head>
 <body class="hidden">
     <!-- Écran d'introduction -->
@@ -150,7 +144,7 @@
             <span class="copyright">©</span>
         </div>
         <div class="nav-links">
-            <a href="#home" id="home-link">Accueil</a>
+            <a href="/index.html" id="home-link">Accueil</a>
             <a href="#projects" id="projects-link">Projets</a>
             <a href="#about" id="about-link">À Propos</a>
             <a href="#contact" id="contact-link">Contact</a>
@@ -192,36 +186,44 @@
         </div>
 
         <div class="bio-section">
-          <div class="bio">
-            <p>
-              "Engagé et à l’écoute, je suis toujours prêt à approfondir mes compétences en développement web. Mon expérience m’a permis de contribuer à des projets variés, principalement axés sur le développement de sites et plateformes web, avec un intérêt marqué pour l’amélioration continue des interfaces et des fonctionnalités."
-            </p>
-            <p>
-              "Curieux et adaptable, je reste à jour sur les avancées technologiques pour enrichir constamment mon expertise. J’apprécie le travail en équipe tout en sachant être autonome pour mener les projets à bien de manière efficace et rigoureuse."
-            </p>
-          </div>
+            <div class="bio">
+                <p>
+                "Engagé et à l’écoute, je suis toujours prêt à approfondir mes compétences en développement web. Mon expérience m’a permis de contribuer à des projets variés, principalement axés sur le développement de sites et plateformes web, avec un intérêt marqué pour l’amélioration continue des interfaces et des fonctionnalités."
+                </p>
+                <p>
+                "Curieux et adaptable, je reste à jour sur les avancées technologiques pour enrichir constamment mon expertise. J’apprécie le travail en équipe tout en sachant être autonome pour mener les projets à bien de manière efficace et rigoureuse."
+                </p>
+            </div>
 
-          <div class="competences">
-            <h2>COMPÉTENCES</h2>
-            <div class="competence-category" onclick="toggleDescription('web', this)">
-                <h3><span class="chevron">&#x276F;</span> Web</h3>
-                <p id="web" class="description hidden">
-                    Passionné par le développement informatique, je possède une bonne expérience en développement, avec une spécialisation marquée en front-end. Étant passionné par le développement web, je reste curieux et enthousiaste d'apprendre et d'explorer de nouveaux domaines, que ce soit dans le développement logiciel, mobile ou web.
-                </p>
+            <div class="competences">
+                <h2>COMPÉTENCES</h2>
+                <div class="competence-category" onclick="toggleDescription('web', this)">
+                    <h3><span class="chevron">&#x276F;</span> Développement Web</h3>
+                    <p id="web" class="description hidden">
+                        Développeur web polyvalent, je maîtrise le front-end avec HTML, CSS et JavaScript, et possède des compétences en gestion de sites WordPress. En back-end, j’ai une expérience solide avec Node.js et Golang. Mon approche consiste à concevoir des solutions complètes, performantes et adaptées aux besoins des utilisateurs.
+                    </p>
+                </div>
+                <div class="competence-category" onclick="toggleDescription('data', this)">
+                    <h3><span class="chevron">&#x276F;</span> Data</h3>
+                    <p id="data" class="description hidden">
+                        Je travaille sur la gestion et la transformation des données en utilisant Python (Pandas, NumPy) et SQL. Je m'intéresse à la création de solutions simples et efficaces pour traiter et organiser les données.
+                    </p>
+                </div>
+                <div class="competence-category" onclick="toggleDescription('IA', this)">
+                    <h3><span class="chevron">&#x276F;</span> Intelligence Artificielle</h3>
+                    <p id="IA" class="description hidden">
+                        En apprentissage dans le domaine de l’intelligence artificielle, je réalise des projets personnels pour explorer le machine learning avec Python (Neat). J’approfondis mes connaissances tout en expérimentant des concepts fondamentaux pour développer mes compétences.
+                    </p>
+                </div>
             </div>
-            <div class="competence-category" onclick="toggleDescription('mobile', this)">
-                <h3><span class="chevron">&#x276F;</span> Mobile</h3>
-                <p id="mobile" class="description hidden">
-                    Passionné par le développement informatique, je possède une bonne expérience en développement, avec une spécialisation marquée en front-end. Étant passionné par le développement web, je reste curieux et enthousiaste d'apprendre et d'explorer de nouveaux domaines, que ce soit dans le développement logiciel, mobile ou web.
-                </p>
+
+            <div class="spacer-2"></div>
+
+            <div class="projects">
+                <h2>PROJETS</h2>
             </div>
-            <div class="competence-category" onclick="toggleDescription('software', this)">
-                <h3><span class="chevron">&#x276F;</span> Logiciel</h3>
-                <p id="software" class="description hidden">
-                    Passionné par le développement informatique, je possède une bonne expérience en développement, avec une spécialisation marquée en front-end. Étant passionné par le développement web, je reste curieux et enthousiaste d'apprendre et d'explorer de nouveaux domaines, que ce soit dans le développement logiciel, mobile ou web.
-                </p>
-            </div>
-          </div>
+
+            <div class="spacer-3"></div>          
         </div>
     </div>
 
@@ -232,7 +234,7 @@
 
       window.addEventListener('load', () => {
           document.body.classList.remove('hidden');
-          window.scrollTo(0, 0); // Assure que la page commence en haut
+          window.scrollTo(0, 0); 
       });
 
       const letters = document.querySelectorAll(".text-appear span");
@@ -268,8 +270,7 @@
           const wordSlider = document.querySelector('.word-slider');
           const scrollIcon = document.querySelector('.scroll-icon');
 
-          // Calculer le facteur de zoom basé sur la position de défilement
-          const zoomFactor = 1 + scrollPosition / 1000; // Ajustez le diviseur pour contrôler la sensibilité
+          const zoomFactor = 1 + scrollPosition / 1000; 
 
           nameTitle.style.transform = `scale(${zoomFactor})`;
 
@@ -300,7 +301,6 @@
         const description = document.getElementById(id);
         description.classList.toggle('hidden');
         
-        // Tourner le chevron
         const chevron = element.querySelector('.chevron');
         chevron.classList.toggle('rotated');
       }

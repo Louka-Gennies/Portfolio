@@ -402,3 +402,26 @@ canvas {
 .competences .chevron.rotated {
     transform: rotate(90deg); /* Tourner vers le bas */
 }
+
+.spacer-2 {
+    min-height: 10vh;
+    width: 100%;
+}
+
+.projects {
+    color: var(--white);
+    font-family: 'Host Grotesk', sans-serif;
+    width: 100%;
+}
+
+.projects h2 {
+    font-family: 'League Gothic';
+    font-size: 150px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.spacer-3 {
+    min-height: 50vh;
+    width: 100%;
+}
