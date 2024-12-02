@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Image Slider</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        .projets {
+            display: flex;
+            align-items: center;
+            height: 45vh;
+            gap: 1.5px;
+            transition: all 0.5s;
+        }
+        .projet_indiv {
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+        .projet_indiv img {
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s;
+        }
+        .projets > *:not(:nth-child(10)) img{
+            filter: grayscale();
+            width: 100%;
+        }
+        .projets > *:not(:nth-child(10)) img:hover{
+            filter: none;
+        }
+        .projets > *:not(:nth-child(10 )){
+            width: 10%;
+        }
+        .projets > *:nth-child(9), .projets > *:nth-child(11) {
+            width: 80%; 
+        }
+        .projets > *:nth-child(8), .projets > *:nth-child(12) {
+            width: 50%; 
+        }
+        .projets > *:nth-child(7), .projets > *:nth-child(13) {
+            width: 40%; 
+        }
+        .projets > *:nth-child(6), .projets > *:nth-child(14) {
+            width: 30%; 
+        }
+        .projets > *:nth-child(5), .projets > *:nth-child(15) {
+            width: 20%; 
+        }   
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 15px; 
+            height: 15px;
+            background-color: #4a88fc;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+            transform: translate(-50%, -50%);
+            opacity: 0; 
+            padding: 0;
+            margin: 0;
+            z-index: 1000;
+        } 
+        /* Buttons */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 2rem;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="cursor"></div>
+    <div class="container">
+        <div class="projets" id="projets">
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
+            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
+        </div>
+    </div>
+    <div class="prev" id="prev">&#10094;</div>
+    <div class="next" id="next">&#10095;</div>
+
+    <script>
+        const cursor = document.getElementById("cursor");
+        const projets = document.getElementById("projets");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+
+        // Suivre la souris
+        document.addEventListener("mousemove", (event) => {
+            cursor.style.left = `${event.pageX}px`;
+            cursor.style.top = `${event.pageY}px`;
+        });
+
+        // Animation de défilement du carrousel
+        let currentIndex = 9;
+        const totalImages = document.querySelectorAll(".projet_indiv").length;
+
+        function scrollToIndex(index) {
+            const width = document.querySelector(".projet_indiv").offsetWidth;
+            projets.style.transform = `translateX(-${index * width}px)`;
+        }
+
+        nextButton.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            scrollToIndex(currentIndex);
+        });
+
+        prevButton.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            scrollToIndex(currentIndex);
+        });
+
+        // Défilement automatique
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            scrollToIndex(currentIndex);
+        }, 3000);  // Change l'image toutes les 3 secondes
+
+        // Fonctionnalités du curseur personnalisé
+        const areas = document.querySelectorAll(".projet_indiv");
+
+        areas.forEach((area, index) => {
+            area.addEventListener("mouseenter", () => {
+                cursor.style.opacity = 1; 
+                if (index === 9) { 
+                    cursor.style.width = "15px";
+                    cursor.style.height = "15px";
+                } else {
+                    cursor.style.width = "7.5px";
+                    cursor.style.height = "7.5px";
+                }
+            });
+
+            area.addEventListener("mouseleave", () => {
+                cursor.style.opacity = 0;
+            });
+        });
+    </script>
+</body>
+</html>
