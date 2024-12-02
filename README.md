@@ -47,9 +47,9 @@ Bienvenue sur le dépôt de mon portfolio personnel ! Ce projet met en avant mes
 ## ✉️ Contact
 
 Si vous souhaitez en savoir plus sur mon travail ou collaborer avec moi, n'hésitez pas à me contacter :
-Email : louka.gen@gmail.com
-LinkedIn : [LinkedIn](https://www.linkedin.com/in/louka-gennies/)
-GitHub : [GitHub](https://github.com/Louka-Gennies)
+- Email : louka.gen@gmail.com
+- LinkedIn : [LinkedIn](https://www.linkedin.com/in/louka-gennies/)
+- GitHub : [GitHub](https://github.com/Louka-Gennies)
 
 ---
 
