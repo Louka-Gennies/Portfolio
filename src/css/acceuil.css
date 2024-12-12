@@ -1,0 +1,556 @@
+@import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=League+Gothic&display=swap");
+
+:root {
+   --royal-blue: #4a88fc;
+   --white: #f6f2e6;
+   --light-gray: #bebcb3;
+   --gray: #4c4c4c;
+   --black: #111111;
+   --nav-bg: #191919;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html,
+body {
+   width: 100vw;
+   font-family: "Host Grotesk", sans-serif;
+   overflow-x: hidden;
+   overflow-y: auto;
+   scroll-behavior: smooth;
+   background-color: var(--black);
+   margin: 0;
+   padding: 0;
+}
+
+canvas {
+   display: block;
+   width: 100%;
+   height: 100%;
+   z-index: 1;
+}
+
+.background {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 0;
+   transition: opacity 0.5s ease;
+   pointer-events: none;
+}
+
+.background.faded {
+   opacity: 0;
+}
+
+#intro-screen {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: var(--black);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: var(--white);
+   z-index: 1000;
+   transition: transform 1s ease;
+}
+
+.text-appear span {
+   font-size: 70px;
+   font-weight: 800;
+   opacity: 0;
+   display: inline-block;
+   transform: translateY(20px);
+   animation: slideUpText 0.5s forwards;
+}
+
+@keyframes slideUpText {
+   0% {
+      opacity: 0;
+      transform: translateY(50px);
+   }
+   100% {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+.container {
+   min-width: 100vw;
+   max-width: 100vw;
+   min-height: 100vh;
+   height: auto;
+   z-index: 400;
+   margin: 0;
+   padding: 3% 8% 0 8%;
+}
+
+.content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   color: var(--white);
+   padding: 0;
+   margin: 0;
+}
+
+.name-title {
+   position: absolute;
+   bottom: 100px;
+   color: var(--white);
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   transition: transform 0.5s ease, opacity 0.5s ease;
+   width: calc(100vw - 16%);
+   left: 8%;
+}
+
+.name-title.zoomed {
+   transform: scale(1.5);
+}
+
+.name-title.description.hidden {
+   opacity: 0;
+}
+
+.name-title h1 {
+   font-family: "League Gothic";
+   font-size: 18.4vw;
+   font-weight: 800;
+}
+
+.name {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+
+.scroll-icon {
+   position: absolute;
+   bottom: 20px;
+   width: 100%;
+   text-align: center;
+   font-size: 30px;
+   color: var(--white);
+   transition: opacity 0.5s ease;
+}
+
+.scroll-icon.hidden {
+   opacity: 0;
+}
+
+.scroll-icon div {
+   font-size: 20px;
+   margin-bottom: 5px;
+}
+
+.scroll-icon .chevron {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0px;
+   animation: bounce 2s infinite;
+}
+
+.scroll-icon .chevron span {
+   display: inline-block;
+   font-size: 20px;
+   transform: rotate(90deg);
+   margin-bottom: -5px;
+}
+
+@keyframes bounce {
+   0%,
+   20%,
+   50%,
+   80%,
+   100% {
+      transform: translateY(0);
+   }
+   40% {
+      transform: translateY(-10px);
+   }
+   60% {
+      transform: translateY(-5px);
+   }
+}
+
+.word-slider {
+   position: absolute;
+   left: 8.5%;
+   bottom: 50%;
+   overflow: hidden;
+   height: 50px;
+   width: 300px;
+   display: flex;
+   align-items: center;
+   transition: opacity 0.5s ease;
+}
+
+.word-slider.hidden {
+   opacity: 0;
+}
+
+.word-slider .word {
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   font-size: 50px;
+   position: absolute;
+   width: auto;
+   height: auto;
+   animation: slide 15s infinite;
+   color: var(--light-gray);
+   opacity: 0;
+   transform: translateY(20px);
+   text-align: left;
+}
+
+.word-slider .word:nth-child(1) {
+   animation-delay: 0s;
+}
+
+.word-slider .word:nth-child(2) {
+   animation-delay: 5s;
+}
+
+.word-slider .word:nth-child(3) {
+   animation-delay: 10s;
+}
+
+@keyframes slide {
+   0%,
+   20% {
+      opacity: 0;
+      transform: translateY(20px);
+   }
+   25%,
+   45% {
+      opacity: 1;
+      transform: translateY(0);
+   }
+   50%,
+   100% {
+      opacity: 0;
+      transform: translateY(-20px);
+   }
+}
+
+.spacer {
+   min-height: 100vh;
+   width: 100%;
+   background-color: transparent;
+}
+
+.bio {
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+   color: var(--light-gray);
+   text-align: left;
+   font-family: "Host Grotesk", sans-serif;
+   gap: 30px;
+   margin-bottom: 150px;
+}
+
+.bio p {
+   font-size: 30px;
+   max-width: 75%;
+   line-height: 1.5;
+}
+
+.competences {
+   color: var(--white);
+   font-family: "Host Grotesk", sans-serif;
+}
+
+.competences h2 {
+   font-family: "League Gothic";
+   font-size: 150px;
+   font-weight: 800;
+   margin-bottom: 20px;
+}
+
+.competences h3 {
+   font-family: "League Gothic";
+   font-size: 100px;
+   font-weight: 800;
+}
+
+.competences p {
+   font-size: 25px;
+   max-width: 50%;
+   line-height: 1.5;
+}
+
+.competence-category {
+   border-top: var(--light-gray);
+   border-width: 1px;
+   border-top-style: solid;
+   margin-bottom: 10px;
+}
+
+.description {
+   max-height: 0;
+   overflow: hidden;
+   transition: max-height 0.3s ease;
+}
+
+.description.hidden {
+   max-height: 0;
+}
+
+.description:not(.hidden) {
+   max-height: 300px;
+}
+
+.competences .chevron {
+   display: inline-block;
+   color: var(--royal-blue);
+   transition: transform 0.3s ease;
+}
+
+.competences .chevron.rotated {
+   transform: rotate(90deg);
+}
+
+.spacer-2 {
+   min-height: 10vh;
+   width: 100%;
+}
+
+.projects {
+   color: var(--white);
+   font-family: "Host Grotesk", sans-serif;
+   width: 100%;
+}
+
+.projects h2 {
+   font-family: "League Gothic";
+   font-size: 150px;
+   font-weight: 800;
+   margin-bottom: 20px;
+}
+
+.carousel {
+   aspect-ratio: 990 / 460;
+   position: relative;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   overflow: hidden;
+   border-radius: 20px;
+}
+
+.carousel-inner {
+   display: flex;
+   transition: transform 1s ease;
+   width: 100%;
+   height: 100%;
+}
+
+.carousel-item {
+   width: 100%;
+   height: 100%;
+   flex-shrink: 0;
+   position: relative;
+}
+
+.carousel img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   flex-shrink: 0;
+}
+
+.nav-btn {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   cursor: pointer;
+   z-index: 2;
+   background: var(--black);
+   color: var(--white);
+   border: none;
+   padding: 10px 20px;
+   font-size: 18px;
+   border-radius: 5px;
+   font-family: "Host Grotesk", sans-serif;
+}
+
+.nav-btn.prev {
+   left: 20px;
+}
+
+.nav-btn.next {
+   right: 20px;
+}
+
+.caption {
+   text-align: center;
+   margin-top: 20px;
+   font-size: 2rem;
+   color: var(--white);
+   opacity: 0;
+   transition: opacity 0.5s ease;
+   font-family: "Host Grotesk", sans-serif;
+}
+
+.caption.visible {
+   opacity: 1;
+}
+
+.carousel .overlay-projet {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 50%;
+   background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+   display: flex;
+   align-items: flex-end;
+   justify-content: center;
+   opacity: 0;
+   transition: opacity 0.3s ease;
+}
+
+.carousel img:hover + .overlay-projet {
+   opacity: 1;
+}
+
+.overlay-projet:hover {
+   opacity: 1;
+}
+
+.overlay-projet p {
+   font-family: "Host Grotesk", sans-serif;
+   color: var(--white);
+   font-size: 30px;
+   margin: 0;
+}
+
+.overlay-projet svg {
+   fill: var(--white);
+   height: 30px;
+   margin: 0;
+}
+
+.overlay-text {
+   display: flex;
+   margin-bottom: 5%;
+   align-items: center;
+   gap: 10px;
+}
+
+.spacer-3 {
+   min-height: 10vh;
+   width: 100%;
+}
+
+.contact {
+   color: var(--white);
+   font-family: "Host Grotesk", sans-serif;
+   width: 100%;
+}
+
+.contact h2 {
+   font-family: "League Gothic";
+   font-size: 150px;
+   font-weight: 800;
+   margin-bottom: 20px;
+}
+
+.contact-content {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   width: 100%;
+   gap: 50px;
+}
+
+.contact-text {
+   width: 50%;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+}
+
+.title-contact-text {
+   display: flex;
+   flex-direction: row;
+}
+
+.contact-text h3 {
+   font-size: 60px;
+   font-weight: 800;
+   margin-bottom: 20px;
+}
+
+.contact-text p {
+   font-size: 25px;
+   max-width: 80%;
+   line-height: 1.5;
+}
+
+.contact-list {
+   width: fit-content;
+   background-color: var(--nav-bg);
+   padding: 1%;
+   border-radius: 20px;
+}
+
+.contact-list ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+   height: 80%;
+   display: flex;
+   flex-direction: column;
+   gap: 8%;
+}
+
+.contact-list ul li {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   font-size: 25px;
+   padding: 25px;
+   background-color: #2b2b2b;
+   border-radius: 20px;
+   height: 25%;
+}
+
+.contact-list ul li svg {
+   height: 20px;
+   fill: var(--royal-blue);
+}
+
+.contact-list ul li a {
+   text-decoration: none;
+   color: var(--white);
+   font-size: 1.3rem;
+}
+
+.contact-list ul li a:hover {
+   text-decoration: none;
+   color: var(--light-gray);
+}
+
+.contact-list ul li p {
+   color: var(--white);
+   font-size: 1.3rem;
+}

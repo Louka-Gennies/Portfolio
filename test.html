@@ -1,185 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite Image Slider</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-        }
-        .projets {
-            display: flex;
-            align-items: center;
-            height: 45vh;
-            gap: 1.5px;
-            transition: all 0.5s;
-        }
-        .projet_indiv {
-            height: 100%;
-            cursor: pointer;
-            transition: all 0.5s;
-        }
-        .projet_indiv img {
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.3s;
-        }
-        .projets > *:not(:nth-child(10)) img{
-            filter: grayscale();
-            width: 100%;
-        }
-        .projets > *:not(:nth-child(10)) img:hover{
-            filter: none;
-        }
-        .projets > *:not(:nth-child(10 )){
-            width: 10%;
-        }
-        .projets > *:nth-child(9), .projets > *:nth-child(11) {
-            width: 80%; 
-        }
-        .projets > *:nth-child(8), .projets > *:nth-child(12) {
-            width: 50%; 
-        }
-        .projets > *:nth-child(7), .projets > *:nth-child(13) {
-            width: 40%; 
-        }
-        .projets > *:nth-child(6), .projets > *:nth-child(14) {
-            width: 30%; 
-        }
-        .projets > *:nth-child(5), .projets > *:nth-child(15) {
-            width: 20%; 
-        }   
-        #cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 15px; 
-            height: 15px;
-            background-color: #4a88fc;
-            border-radius: 50%;
-            pointer-events: none;
-            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-            transform: translate(-50%, -50%);
-            opacity: 0; 
-            padding: 0;
-            margin: 0;
-            z-index: 1000;
-        } 
-        /* Buttons */
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 2rem;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        .prev {
-            left: 20px;
-        }
-        .next {
-            right: 20px;
-        }
-    </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Carousel with Sliding Animation</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+      
+      body, html {
+         width: 100vw;
+         height: 100vh;
+         overflow: hidden; /* Évite tout défilement */
+         font-family: Arial, sans-serif;
+      }
+      
+      .container {
+         width: 100vw;
+         height: 100vh;
+         padding: 0 8%; /* Garder du padding sur les côtés */
+         position: relative;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+      }
+      
+      .carousel {
+         position: absolute; /* Permet de dépasser les limites du container */
+         top: 0;
+         left: 0;
+         width: 100vw;
+         height: 50vh;
+         display: flex;
+         overflow: hidden;
+      }
+      
+      .carousel-inner {
+         display: flex;
+         transition: transform 1s ease;
+         width: 100%;
+         height: 100%;
+      }
+      
+      .carousel img {
+         width: 100vw;
+         height: 100vh;
+         object-fit: cover; /* S'assure que les images remplissent l'écran */
+         flex-shrink: 0;
+      }
+      
+      .nav-btn {
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         cursor: pointer;
+         z-index: 2;
+         background: rgba(0, 0, 0, 0.5);
+         color: white;
+         border: none;
+         padding: 10px 20px;
+         font-size: 18px;
+         border-radius: 5px;
+      }
+      
+      .nav-btn.prev {
+         left: 20px;
+      }
+      
+      .nav-btn.next {
+         right: 20px;
+      }
+      
+      .caption {
+         text-align: center;
+         margin-top: 20px;
+         font-size: 1.2rem;
+         color: #333;
+         opacity: 0; /* Masqué par défaut */
+         transition: opacity 0.5s ease; /* Transition pour un effet de fondu */
+      }
+
+      .caption.visible {
+         opacity: 1; /* Rendu visible avec une transition */
+      }
+   </style>
 </head>
 <body>
-    <div id="cursor"></div>
-    <div class="container">
-        <div class="projets" id="projets">
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-2.jpg" alt="image projet"></div>
-            <div class="projet_indiv"><img src="./src/assets/images/image-projet-1.jpg" alt="image projet"></div>
-        </div>
-    </div>
-    <div class="prev" id="prev">&#10094;</div>
-    <div class="next" id="next">&#10095;</div>
+   <div class="container">
+      <div class="carousel">
+         <div class="carousel-inner">
+            <img src="./src/assets/images/image-projet-1.jpg" alt="Image 1">
+            <img src="./src/assets/images/image-projet-2.jpg" alt="Image 2">
+            <img src="./src/assets/images/image-projet-1.jpg" alt="Image 3">
+            <img src="./src/assets/images/image-projet-2.jpg" alt="Image 4">
+            <img src="./src/assets/images/image-projet-1.jpg" alt="Image 5">
+         </div>
+         <button class="nav-btn prev">Prev</button>
+         <button class="nav-btn next">Next</button>
+      </div>
+      <div class="caption">
+         <p id="carousel-text">Texte pour l'image 1</p>
+      </div>
+   </div>
 
-    <script>
-        const cursor = document.getElementById("cursor");
-        const projets = document.getElementById("projets");
-        const prevButton = document.getElementById("prev");
-        const nextButton = document.getElementById("next");
+   <script>
+      const carouselInner = document.querySelector('.carousel-inner');
+      const images = document.querySelectorAll('.carousel img');
+      const nextBtn = document.querySelector('.nav-btn.next');
+      const prevBtn = document.querySelector('.nav-btn.prev');
+      const captionText = document.getElementById('carousel-text');
+      const captionContainer = document.querySelector('.caption');
 
-        // Suivre la souris
-        document.addEventListener("mousemove", (event) => {
-            cursor.style.left = `${event.pageX}px`;
-            cursor.style.top = `${event.pageY}px`;
-        });
+      let index = 0;
 
-        // Animation de défilement du carrousel
-        let currentIndex = 9;
-        const totalImages = document.querySelectorAll(".projet_indiv").length;
+      // Tableau des textes associés aux images
+      const captions = [
+         "Texte pour l'image 1",
+         "Texte pour l'image 2",
+         "Texte pour l'image 3",
+         "Texte pour l'image 4",
+         "Texte pour l'image 5"
+      ];
 
-        function scrollToIndex(index) {
-            const width = document.querySelector(".projet_indiv").offsetWidth;
-            projets.style.transform = `translateX(-${index * width}px)`;
-        }
+      function updateCarousel() {
+         const offset = -index * 100; // Calcule l'offset pour le défilement
+         carouselInner.style.transform = `translateX(${offset}%)`;
 
-        nextButton.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % totalImages;
-            scrollToIndex(currentIndex);
-        });
+         // Masque le texte, puis le met à jour après une courte pause
+         captionContainer.classList.remove('visible');
+         setTimeout(() => {
+            captionText.textContent = captions[index]; // Met à jour le texte
+            captionContainer.classList.add('visible'); // Fait réapparaître le texte
+         }, 500); // La durée doit correspondre à celle de la transition CSS
+      }
 
-        prevButton.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            scrollToIndex(currentIndex);
-        });
+      nextBtn.addEventListener('click', () => {
+         index = (index + 1) % images.length; // Revient au début si on dépasse la fin
+         updateCarousel();
+      });
 
-        // Défilement automatique
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % totalImages;
-            scrollToIndex(currentIndex);
-        }, 3000);  // Change l'image toutes les 3 secondes
+      prevBtn.addEventListener('click', () => {
+         index = (index - 1 + images.length) % images.length; // Revient à la fin si on est avant le début
+         updateCarousel();
+      });
 
-        // Fonctionnalités du curseur personnalisé
-        const areas = document.querySelectorAll(".projet_indiv");
-
-        areas.forEach((area, index) => {
-            area.addEventListener("mouseenter", () => {
-                cursor.style.opacity = 1; 
-                if (index === 9) { 
-                    cursor.style.width = "15px";
-                    cursor.style.height = "15px";
-                } else {
-                    cursor.style.width = "7.5px";
-                    cursor.style.height = "7.5px";
-                }
-            });
-
-            area.addEventListener("mouseleave", () => {
-                cursor.style.opacity = 0;
-            });
-        });
-    </script>
+      // Initialise le texte pour l'image actuelle
+      updateCarousel();
+   </script>
 </body>
 </html>

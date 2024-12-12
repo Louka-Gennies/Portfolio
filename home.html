@@ -1,309 +1,449 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LG / Accueil</title>
-    <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./src/css/style.css"></noscript>
-</head>
-<body class="hidden">
-    <!-- Écran d'introduction -->
-    <div id="intro-screen">
-        <h1 class="text-appear">
-            <span>L</span><span>O</span><span>U</span><span>K</span><span>A</span>
-            <span>&nbsp;</span>
-            <span>G</span><span class="blue-letter">E</span><span>N</span><span>N</span><span>I</span><span class="blue-letter">E</span><span>S</span>
-        </h1>
-    </div>
-
-    <!-- Fond animé avec Three.js -->
-    <div class="background">
-        <canvas id="canvas"></canvas>
-        <script type="module">
-            import * as T from './src/js/three.module.min.js';
-            import { OrbitControls } from './src/js/OrbitControls.js';
-            import fragmentShader from './src/shaders/fragment.js';
-            import vertexShader from './src/shaders/vertex.js';
-            import { DotScreenShader } from './src/js/customShader.js';
-            import { EffectComposer } from './src/js/EffectComposer.js';
-            import { RenderPass } from './src/js/RenderPass.js';
-            import { ShaderPass } from './src/js/ShaderPass.js';
-
-            const device = {
-                width: window.innerWidth,
-                height: window.innerHeight,
-                pixelRatio: window.devicePixelRatio
-            };
-
-            class Three {
-                constructor(canvas) {
-                    this.canvas = canvas;
-                    this.time = 0;
-                    this.scene = new T.Scene();
-
-                    this.camera = new T.PerspectiveCamera(
-                        75,
-                        device.width / device.height,
-                        0.1,
-                        100
-                    );
-                    this.camera.position.set(0, 0, 1.3);
-                    this.scene.add(this.camera);
-
-                    this.renderer = new T.WebGLRenderer({
-                        canvas: this.canvas,
-                        alpha: true,
-                        antialias: true,
-                        preserveDrawingBuffer: true
-                    });
-                    this.renderer.setSize(device.width, device.height);
-                    this.renderer.setPixelRatio(Math.min(device.pixelRatio, 2));
-
-                    this.renderer.setClearColor(0x333333, 1);
-
-                    this.controls = new OrbitControls(this.camera, this.canvas);
-                    this.controls.enableZoom = false;
-                    this.controls.enableRotate = false;
-                    this.controls.enablePan = false;
-                    this.clock = new T.Clock();
-
-                    this.initPost();
-                    this.setLights();
-                    this.setGeometry();
-                    this.render();
-                    this.setResize();
-                }
-
-                initPost() {
-                    this.composer = new EffectComposer(this.renderer);
-                    this.composer.addPass(new RenderPass(this.scene, this.camera));
-
-                    const effect1 = new ShaderPass(DotScreenShader);
-                    effect1.uniforms['scale'].value = 4;
-                    this.composer.addPass(effect1);
-                }
-
-                setLights() {
-                    this.ambientLight = new T.AmbientLight(0xffffff, 0.5);
-                    this.scene.add(this.ambientLight);
-                }
-
-                setGeometry() {
-                    this.planeGeometry = new T.SphereGeometry(1.5, 32, 32);
-                    this.planeMaterial = new T.ShaderMaterial({
-                        side: T.DoubleSide,
-                        wireframe: false,
-                        fragmentShader: fragmentShader,
-                        vertexShader: vertexShader,
-                        uniforms: {
-                            time: { value: 0 }
-                        }
-                    });
-
-                    this.planeMesh = new T.Mesh(this.planeGeometry, this.planeMaterial);
-                    this.scene.add(this.planeMesh);
-                }
-
-                render() {
-                    this.time += 0.001;
-                    this.planeMaterial.uniforms.time.value = this.time;
-                    requestAnimationFrame(this.render.bind(this));
-                    this.composer.render();
-                }
-
-                setResize() {
-                    window.addEventListener('resize', () => {
-                        device.width = window.innerWidth;
-                        device.height = window.innerHeight;
-
-                        this.camera.aspect = device.width / device.height;
-                        this.camera.updateProjectionMatrix();
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accueil</title>
+        <link rel="preload" href="./src/css/acceuil.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" href="./src/assets/ico/favicon.ico" />
+    </head>
+    <body class="hidden">
+        <div class="overlay" id="overlay"></div>
+        <div id="intro-screen">
+            <h1 class="text-appear">
+                <span>L</span><span>O</span><span>U</span><span>K</span><span>A</span>
+                <span>&nbsp;</span>
+                <span>G</span><span class="blue-letter">E</span><span>N</span><span>N</span><span>I</span><span class="blue-letter">E</span><span>S</span>
+            </h1>
+        </div>
+        <div class="background">
+            <canvas id="canvas">
+            </canvas>
+            <script type="module">
+                import * as T from './src/js/three.module.min.js';
+                import { OrbitControls } from './src/js/OrbitControls.js';
+                import fragmentShader from './src/shaders/fragment.js';
+                import vertexShader from './src/shaders/vertex.js';
+                import { DotScreenShader } from './src/js/customShader.js';
+                import { EffectComposer } from './src/js/EffectComposer.js';
+                import { RenderPass } from './src/js/RenderPass.js';
+                import { ShaderPass } from './src/js/ShaderPass.js';
+                
+                const device = {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    pixelRatio: window.devicePixelRatio
+                };
+                
+                class Three {
+                    constructor(canvas) {
+                        this.canvas = canvas;
+                        this.time = 0;
+                        this.scene = new T.Scene();
+                
+                        this.camera = new T.PerspectiveCamera(
+                            75,
+                            device.width / device.height,
+                            0.1,
+                            100
+                        );
+                        this.camera.position.set(0, 0, 1.3);
+                        this.scene.add(this.camera);
+                
+                        this.renderer = new T.WebGLRenderer({
+                            canvas: this.canvas,
+                            alpha: true,
+                            antialias: true,
+                            preserveDrawingBuffer: true
+                        });
                         this.renderer.setSize(device.width, device.height);
                         this.renderer.setPixelRatio(Math.min(device.pixelRatio, 2));
-
-                        this.composer.setSize(device.width, device.height);
-                    });
+                
+                        this.renderer.setClearColor(0x333333, 1);
+                
+                        this.controls = new OrbitControls(this.camera, this.canvas);
+                        this.controls.enableZoom = false;
+                        this.controls.enableRotate = false;
+                        this.controls.enablePan = false;
+                        this.clock = new T.Clock();
+                
+                        this.initPost();
+                        this.setLights();
+                        this.setGeometry();
+                        this.render();
+                        this.setResize();
+                    }
+                
+                    initPost() {
+                        this.composer = new EffectComposer(this.renderer);
+                        this.composer.addPass(new RenderPass(this.scene, this.camera));
+                
+                        const effect1 = new ShaderPass(DotScreenShader);
+                        effect1.uniforms['scale'].value = 4;
+                        this.composer.addPass(effect1);
+                    }
+                
+                    setLights() {
+                        this.ambientLight = new T.AmbientLight(0xffffff, 0.5);
+                        this.scene.add(this.ambientLight);
+                    }
+                
+                    setGeometry() {
+                        this.planeGeometry = new T.SphereGeometry(1.5, 32, 32);
+                        this.planeMaterial = new T.ShaderMaterial({
+                            side: T.DoubleSide,
+                            wireframe: false,
+                            fragmentShader: fragmentShader,
+                            vertexShader: vertexShader,
+                            uniforms: {
+                                time: { value: 0 }
+                            }
+                        });
+                
+                        this.planeMesh = new T.Mesh(this.planeGeometry, this.planeMaterial);
+                        this.scene.add(this.planeMesh);
+                    }
+                
+                    render() {
+                        this.time += 0.001;
+                        this.planeMaterial.uniforms.time.value = this.time;
+                        requestAnimationFrame(this.render.bind(this));
+                        this.composer.render();
+                    }
+                
+                    setResize() {
+                        window.addEventListener('resize', () => {
+                            device.width = window.innerWidth;
+                            device.height = window.innerHeight;
+                
+                            this.camera.aspect = device.width / device.height;
+                            this.camera.updateProjectionMatrix();
+                
+                            this.renderer.setSize(device.width, device.height);
+                            this.renderer.setPixelRatio(Math.min(device.pixelRatio, 2));
+                
+                            this.composer.setSize(device.width, device.height);
+                        });
+                    }
                 }
+                
+                window.addEventListener('load', () => {
+                    const canvas = document.querySelector('#canvas');
+                    if (canvas) {
+                        new Three(canvas);
+                    }
+                });
+            </script>
+        </div>
+        <nav class="navbar">
+            <div class="logo" onclick="scrollToTop()">
+                <span>LG</span>
+                <span class="copyright">©</span>
+            </div>
+            <div class="nav-links">
+                <a href="/home.html" id="home-link" class="active" onclick="navigate(event, '/home.html')">Accueil</a>
+                <a href="/projets.html" id="projects-link" onclick="navigate(event, '/projets.html')">Projets</a>
+                <a href="#about" id="about-link" onclick="navigate(event, '#about')">À Propos</a>
+                <a href="#contact" id="contact-link" onclick="navigate(event, '#contact')">Contact</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="content">
+                <div>
+                    <div class="word-slider">
+                        <div class="word">Créatif</div>
+                        <div class="word">Innovant</div>
+                        <div class="word">Passionné</div>
+                    </div>
+                    <div class="name-title">
+                        <div class="name">
+                            <h1>LOUKA</h1>
+                        </div>
+                        <div class="name">
+                            <h1>G</h1>
+                            <h1 class="blue-letter">E</h1>
+                            <h1>NNI</h1>
+                            <h1 class="blue-letter">E</h1>
+                            <h1>S</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-icon">
+                    <div>Scroll</div>
+                    <div class="chevron">
+                        <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+                        <dotlottie-player src="https://lottie.host/0c5bd5d8-fab8-45e0-83d5-dd9f4e461617/3aX5DTkdo1.lottie" background="transparent" speed="1" style="width: 100px; height: 50px" loop autoplay></dotlottie-player>
+                    </div>
+                </div>
+                <div class="spacer"></div>
+            </div>
+            <div class="bio-section">
+                <div class="bio">
+                    <p>
+                        "Engagé et à l’écoute, je suis toujours prêt à approfondir mes compétences en développement web. Mon expérience m’a permis de contribuer à des projets variés, principalement axés sur le développement de sites et plateformes web, avec un intérêt marqué pour l’amélioration continue des interfaces et des fonctionnalités."
+                    </p>
+                    <p>
+                        "Curieux et adaptable, je reste à jour sur les avancées technologiques pour enrichir constamment mon expertise. J’apprécie le travail en équipe tout en sachant être autonome pour mener les projets à bien de manière efficace et rigoureuse."
+                    </p>
+                </div>
+                <div class="competences">
+                    <h2>COMPÉTENCES</h2>
+                    <div class="competence-category" onclick="toggleDescription('web', this)">
+                        <h3><span class="chevron">&#x276F;</span> Développement Web</h3>
+                        <p id="web" class="description hidden">
+                            Développeur web polyvalent, je maîtrise le front-end avec HTML, CSS et JavaScript, et possède des compétences en gestion de sites WordPress. En back-end, j’ai une expérience solide avec Node.js et Golang. Mon approche consiste à concevoir des solutions complètes, performantes et adaptées aux besoins des utilisateurs.
+                        </p>
+                    </div>
+                    <div class="competence-category" onclick="toggleDescription('data', this)">
+                        <h3><span class="chevron">&#x276F;</span> Data</h3>
+                        <p id="data" class="description hidden">
+                            Je travaille sur la gestion et la transformation des données en utilisant Python (Pandas, NumPy) et SQL. Je m'intéresse à la création de solutions simples et efficaces pour traiter et organiser les données.
+                        </p>
+                    </div>
+                    <div class="competence-category" onclick="toggleDescription('IA', this)">
+                        <h3><span class="chevron">&#x276F;</span> Intelligence Artificielle</h3>
+                        <p id="IA" class="description hidden">
+                            En apprentissage dans le domaine de l’intelligence artificielle, je réalise des projets personnels pour explorer le machine learning avec Python (Neat). J’approfondis mes connaissances tout en expérimentant des concepts fondamentaux pour développer mes compétences.
+                        </p>
+                    </div>
+                </div>
+                <div class="spacer-2"></div>
+                <div class="projects">
+                    <h2>PROJETS</h2>
+                    <div class="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <img src="./src/assets/images/Portfolio.png" alt="Portfolio">
+                                <div class="overlay-projet">
+                                    <div class="overlay-text">
+                                        <p>En savoir plus</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./src/assets/images/GroopieTracker.png" alt="GroopieTracker">
+                                <div class="overlay-projet">
+                                    <div class="overlay-text">
+                                        <p>En savoir plus</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./src/assets/images/ChatHeaven.png" alt="ChatHeaven">
+                                <div class="overlay-projet">
+                                    <div class="overlay-text">
+                                        <p>En savoir plus</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./src/assets/images/SQL.png" alt="Système de Gestion des Employés">
+                                <div class="overlay-projet">
+                                    <div class="overlay-text">
+                                        <p>En savoir plus</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="./src/assets/images/UR.png" alt="Unknown Reality">
+                                <div class="overlay-projet">
+                                    <div class="overlay-text">
+                                        <p>En savoir plus</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="nav-btn prev">Prev</button>
+                        <button class="nav-btn next">Next</button>
+                    </div>
+                    <div class="caption">
+                        <p id="carousel-text">Texte pour l'image 1</p>
+                    </div>
+                </div>
+                <div class="spacer-2"></div>
+                <div class="contact">
+                    <h2>Contact</h2>
+                    <div class="contact-content">
+                        <div class="contact-text">
+                            <div class="title-contact-text">
+                                <h3 class="blue-letter">E</h3>
+                                <h3>nter en&nbsp;</h3>
+                                <h3 class="blue-letter">C</h3>
+                                <h3>ontact</h3>
+                            </div>
+                            <p>Merci de visiter mon portfolio ! Si vous êtes intéressé par mon travail, souhaitez discuter d’un projet ou en savoir plus sur mes compétences, je serais heureux de vous répondre.</p>
+                        </div>
+                        <div class="contact-list">
+                            <ul>
+                                <li class="email">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+                                    </svg>
+                                    <p>louka.gen@gmail.com.com</p>
+                                </li>
+                                <li class="phone">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>
+                                    </svg>
+                                    <p>07 68 12 00 06</p>
+                                </li>
+                                <li class="linkedln">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                                    </svg>
+                                    <a href="https://www.linkedin.com/in/louka-gennies/">linkedin.com/louka-gennies</a>
+                                </li>
+                                <li class="github">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                                        <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+                                    </svg>
+                                    <a href="https://github.com/Louka-Gennies">github.com/Louka-Gennies</a>                            
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="spacer-2"></div>
+            </div>
+        </div>
+        <script>
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
             }
-
+            
             window.addEventListener('load', () => {
-                const canvas = document.querySelector('#canvas');
-                if (canvas) {
-                    new Three(canvas);
+                document.body.classList.remove('hidden');
+                window.scrollTo(0, 0); 
+            });
+            
+            const letters = document.querySelectorAll(".text-appear span");
+            letters.forEach((letter, index) => {
+                letter.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            function slideUpIntroScreen() {
+                const introScreen = document.getElementById("intro-screen");
+                introScreen.style.transform = "translateY(-100%)";
+            }
+            
+            setTimeout(slideUpIntroScreen, letters.length * 100 + 1500);
+            
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                const nameTitle = document.querySelector('.name-title');
+                const background = document.querySelector('.background');
+                const wordSlider = document.querySelector('.word-slider');
+                const scrollIcon = document.querySelector('.scroll-icon');
+            
+                const zoomFactor = 1 + scrollPosition / 1000; 
+            
+                nameTitle.style.transform = `scale(${zoomFactor})`;
+            
+                if (zoomFactor > 2) {
+                    nameTitle.style.transform = 'scale(2)';
+                }
+            
+                if (scrollPosition > 0) {
+                    background.classList.add('faded');
+                    wordSlider.classList.add('hidden');
+                    scrollIcon.classList.add('hidden');
+                } else {
+                    nameTitle.style.transform = 'scale(1)';
+                    background.classList.remove('faded');
+                    wordSlider.classList.remove('hidden');
+                    scrollIcon.classList.remove('hidden');
                 }
             });
+            
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            function toggleDescription(id, element) {
+              const description = document.getElementById(id);
+              description.classList.toggle('hidden');
+              
+              const chevron = element.querySelector('.chevron');
+              chevron.classList.toggle('rotated');
+            }
+            
+            const carouselInner = document.querySelector('.carousel-inner');
+            const images = document.querySelectorAll('.carousel img');
+            const nextBtn = document.querySelector('.nav-btn.next');
+            const prevBtn = document.querySelector('.nav-btn.prev');
+            const captionText = document.getElementById('carousel-text');
+            const captionContainer = document.querySelector('.caption');
+            
+            let index = 0;
+            
+            const captions = [
+               "Mon Portfolio",
+               "Groopie Tracker",
+               "Chat Heaven",
+               "Système de Gestion des Employés",
+               "Unknown Reality"
+            ];
+            
+            function updateCarousel() {
+               const offset = -index * 100; 
+               carouselInner.style.transform = `translateX(${offset}%)`;
+            
+               captionContainer.classList.remove('visible');
+               setTimeout(() => {
+                  captionText.textContent = captions[index]; 
+                  captionContainer.classList.add('visible'); 
+               }, 500); 
+            }
+            
+            nextBtn.addEventListener('click', () => {
+               index = (index + 1) % images.length; 
+               updateCarousel();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+               index = (index - 1 + images.length) % images.length;
+               updateCarousel();
+            });
+            
+            updateCarousel();
+
+            function navigate(event, url) {
+                event.preventDefault(); 
+                const overlay = document.getElementById('overlay');
+                overlay.classList.add('active'); 
+    
+                setTimeout(() => {
+                    window.location.href = url; 
+                }, 1500); 
+            }
         </script>
-    </div>
-
-    <!-- Barre de navigation -->
-    <nav class="navbar">
-        <div class="logo" onclick="scrollToTop()">
-            <span>LG</span>
-            <span class="copyright">©</span>
-        </div>
-        <div class="nav-links">
-            <a href="/index.html" id="home-link">Accueil</a>
-            <a href="#projects" id="projects-link">Projets</a>
-            <a href="#about" id="about-link">À Propos</a>
-            <a href="#contact" id="contact-link">Contact</a>
-        </div>
-    </nav>
-
-    <!-- Conteneur principal -->
-    <div class="container">
-        <div class="content">
-            <div class="word-slider">
-                <div class="word">Créatif</div>
-                <div class="word">Innovant</div>
-                <div class="word">Passionné</div>
-            </div>
-
-            <div class="name-title">
-                <div class="name">
-                    <h1>LOUKA</h1>
-                </div>
-
-                <div class="name">
-                    <h1>G</h1>
-                    <h1 class="blue-letter">E</h1>
-                    <h1>NNI</h1>
-                    <h1 class="blue-letter">E</h1>
-                    <h1>S</h1>
-                </div>
-            </div>
-
-            <div class="scroll-icon">
-                <div>Scroll</div>
-                <div class="chevron">
-                    <span>&#x276F;</span>
-                    <span>&#x276F;</span>
-                </div>
-            </div>
-
-            <div class="spacer"></div>
-        </div>
-
-        <div class="bio-section">
-            <div class="bio">
-                <p>
-                "Engagé et à l’écoute, je suis toujours prêt à approfondir mes compétences en développement web. Mon expérience m’a permis de contribuer à des projets variés, principalement axés sur le développement de sites et plateformes web, avec un intérêt marqué pour l’amélioration continue des interfaces et des fonctionnalités."
-                </p>
-                <p>
-                "Curieux et adaptable, je reste à jour sur les avancées technologiques pour enrichir constamment mon expertise. J’apprécie le travail en équipe tout en sachant être autonome pour mener les projets à bien de manière efficace et rigoureuse."
-                </p>
-            </div>
-
-            <div class="competences">
-                <h2>COMPÉTENCES</h2>
-                <div class="competence-category" onclick="toggleDescription('web', this)">
-                    <h3><span class="chevron">&#x276F;</span> Développement Web</h3>
-                    <p id="web" class="description hidden">
-                        Développeur web polyvalent, je maîtrise le front-end avec HTML, CSS et JavaScript, et possède des compétences en gestion de sites WordPress. En back-end, j’ai une expérience solide avec Node.js et Golang. Mon approche consiste à concevoir des solutions complètes, performantes et adaptées aux besoins des utilisateurs.
-                    </p>
-                </div>
-                <div class="competence-category" onclick="toggleDescription('data', this)">
-                    <h3><span class="chevron">&#x276F;</span> Data</h3>
-                    <p id="data" class="description hidden">
-                        Je travaille sur la gestion et la transformation des données en utilisant Python (Pandas, NumPy) et SQL. Je m'intéresse à la création de solutions simples et efficaces pour traiter et organiser les données.
-                    </p>
-                </div>
-                <div class="competence-category" onclick="toggleDescription('IA', this)">
-                    <h3><span class="chevron">&#x276F;</span> Intelligence Artificielle</h3>
-                    <p id="IA" class="description hidden">
-                        En apprentissage dans le domaine de l’intelligence artificielle, je réalise des projets personnels pour explorer le machine learning avec Python (Neat). J’approfondis mes connaissances tout en expérimentant des concepts fondamentaux pour développer mes compétences.
-                    </p>
-                </div>
-            </div>
-
-            <div class="spacer-2"></div>
-
-            <div class="projects">
-                <h2>PROJETS</h2>
-            </div>
-
-            <div class="spacer-3"></div>          
-        </div>
-    </div>
-
-    <script>
-      if ('scrollRestoration' in history) {
-          history.scrollRestoration = 'manual';
-      }
-
-      window.addEventListener('load', () => {
-          document.body.classList.remove('hidden');
-          window.scrollTo(0, 0); 
-      });
-
-      const letters = document.querySelectorAll(".text-appear span");
-      letters.forEach((letter, index) => {
-          letter.style.animationDelay = `${index * 0.1}s`;
-      });
-
-      function slideUpIntroScreen() {
-          const introScreen = document.getElementById("intro-screen");
-          introScreen.style.transform = "translateY(-100%)";
-      }
-
-      setTimeout(slideUpIntroScreen, letters.length * 100 + 1500);
-
-      function setActivePage() {
-          const links = document.querySelectorAll('.nav-links a');
-          links.forEach(link => {
-              if (window.location.hash === link.getAttribute('href')) {
-                  link.classList.add('active');
-              } else {
-                  link.classList.remove('active');
-              }
-          });
-      }
-
-      window.addEventListener('hashchange', setActivePage);
-      window.addEventListener('load', setActivePage);
-
-      window.addEventListener('scroll', () => {
-          const scrollPosition = window.scrollY;
-          const nameTitle = document.querySelector('.name-title');
-          const background = document.querySelector('.background');
-          const wordSlider = document.querySelector('.word-slider');
-          const scrollIcon = document.querySelector('.scroll-icon');
-
-          const zoomFactor = 1 + scrollPosition / 1000; 
-
-          nameTitle.style.transform = `scale(${zoomFactor})`;
-
-          if (zoomFactor > 2) {
-              nameTitle.style.transform = 'scale(2)';
-          }
-
-          if (scrollPosition > 0) {
-              background.classList.add('faded');
-              wordSlider.classList.add('hidden');
-              scrollIcon.classList.add('hidden');
-          } else {
-              nameTitle.style.transform = 'scale(1)';
-              background.classList.remove('faded');
-              wordSlider.classList.remove('hidden');
-              scrollIcon.classList.remove('hidden');
-          }
-      });
-
-      function scrollToTop() {
-          window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-          });
-      }
-
-      function toggleDescription(id, element) {
-        const description = document.getElementById(id);
-        description.classList.toggle('hidden');
-        
-        const chevron = element.querySelector('.chevron');
-        chevron.classList.toggle('rotated');
-      }
-    </script>
-</body>
+    </body>
 </html>

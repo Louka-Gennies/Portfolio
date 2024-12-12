@@ -20,27 +20,23 @@ Bienvenue sur le dépôt de mon portfolio personnel ! Ce projet met en avant mes
 
 ## 📂 Contenu
 
-- **Accueil** : Une introduction à mon parcours, accompagnée d'une photo ou d'une bannière.
+- **Accueil** : Une introduction à mon parcours.
 - **À propos** : Une présentation détaillée de mes compétences, expériences et centres d'intérêt.
-- **Projets** : Une galerie ou une liste de mes projets avec des descriptions, des liens vers les dépôts GitHub, ou des démos en ligne.
+- **Projets** : Une galerie ou une liste de mes projets avec des descriptions, des liens vers les dépôts GitHub.
 - **Contact** : Un formulaire de contact fonctionnel ou des liens directs vers mes profils LinkedIn, GitHub, et autres réseaux.
 
 ---
 
 ## 🚀 Fonctionnalités
 
-- Design responsive pour une expérience optimale sur tous les appareils.
 - Animations CSS subtiles pour rendre la navigation agréable.
 - Interactivité grâce à JavaScript (menus déroulants, sliders, etc.).
-- Formulaire de contact simple et fonctionnel.
 
 ---
 
 ## 🌟 Améliorations futures
 
 - Ajouter un mode sombre.
-- Intégrer un backend pour envoyer les messages du formulaire de contact.
-- Ajouter une page dédiée pour chaque projet.
 
 ---
 

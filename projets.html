@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Projet</title>
+        <link rel="preload" href="./src/css/projets.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" href="./src/assets/ico/favicon.ico" />
+    </head>
+    <body>
+        <div class="overlay" id="overlay"></div>
+        <nav class="navbar">
+            <div class="logo" onclick="scrollToTop()">
+                <span>LG</span>
+                <span class="copyright">©</span>
+            </div>
+            <div class="nav-links">
+                <a href="/home.html" id="home-link" onclick="navigate(event, '/home.html')">Accueil</a>
+                <a href="/projets.html" id="projects-link" class="active" onclick="navigate(event, '/projets.html')">Projets</a>
+                <a href="#about" id="about-link" onclick="navigate(event, '#about')">À Propos</a>
+                <a href="#contact" id="contact-link" onclick="navigate(event, '#contact')">Contact</a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="text-top">
+                <div class="title-top">
+                    <h1>SHOWCAS</h1>
+                    <h1 class="blue-letter">E&nbsp;</h1>
+                    <h1>D</h1>
+                    <h1 class="blue-letter">E</h1>
+                    <h1>S PROJ</h1>
+                    <h1 class="blue-letter">E</h1>
+                    <h1>TS</h1>
+                </div>
+                <div class="years">
+                    <div class="years-numbers">
+                        <h2>202</h2>
+                        <h2 class="blue-letter">4</h2>
+                        <h2>/2</h2>
+                        <h2 class="blue-letter">4</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-down">
+                <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.3.0/dist/dotlottie-wc.js" type="module"></script>
+                <dotlottie-wc src="https://lottie.host/e381e8f2-a193-4dfb-9920-b9314333958d/AG09kcn1D7.lottie" background="transparent" speed="1" style="aspect-ratio: 843 / 1920; width: auto; height: 200px" autoplay loop></dotlottie-wc>
+            </div>
+
+            <div class="content">
+                <div class="project">
+                    <div class="left-project">
+                        <img src="./src/assets/images/Portfolio.png" alt="portfolio">
+                    </div>
+                    <div class="right-project">
+                        <div class="text-project">
+                            <h2>Portfolio</h2>
+                            <p class="description ">Un portfolio interactif et élégant, mettant en lumière ma passion pour l'informatique et mes projets innovants.</p>
+                            <p class="shlash">/</p>
+                            <p class="what">Design Web</p>
+                            <p class="what">Projet Perso</p>
+                        </div>
+                        <div class="button-view">
+                            <a href="#">VOIR PLUS</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="left-project">
+                        <img src="./src/assets/images/ChatHeaven.png" alt="portfolio">
+                    </div>
+                    <div class="right-project">
+                        <div class="text-project">
+                            <h2>Chat Heaven</h2>
+                            <p class="description ">Un forum interactif et intuitif, favorisant des échanges fluides et une expérience utilisateur optimisée.</p>
+                            <p class="shlash">/</p>
+                            <p class="what">Design Web</p>
+                            <p class="what">Gestion BDD</p>
+                            <p class="what">Projet Scolaire</p>
+                        </div>
+                        <div class="button-view">
+                            <a href="#">VOIR PLUS</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="left-project">
+                        <img src="./src/assets/images/GroopieTracker.png" alt="portfolio">
+                    </div>
+                    <div class="right-project">
+                        <div class="text-project">
+                            <h2>Groopie Tracker</h2>
+                            <p class="description ">Un site dynamique pour explorer les tournées de vos artistes préférés, rester informé de leurs prochains concerts et revisiter leurs performances passées.</p>
+                            <p class="shlash">/</p>
+                            <p class="what">Design Web</p>
+                            <p class="what">Gestion API</p>
+                            <p class="what">Projet Scolaire</p>
+                        </div>
+                        <div class="button-view">
+                            <a href="#">VOIR PLUS</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="left-project">
+                        <img src="./src/assets/images/SQL.png" alt="portfolio">
+                    </div>
+                    <div class="right-project">
+                        <div class="text-project">
+                            <h2>Projet SQL</h2>
+                            <p class="description ">Un système de gestion d’employés optimisé avec SQL, permettant une organisation efficace des données et une analyse détaillée pour une meilleure prise de décision.</p>
+                            <p class="shlash">/</p>
+                            <p class="what">Design Web</p>
+                            <p class="what">Gestion BDD</p>
+                            <p class="what">Projet Scolaire</p>
+                        </div>
+                        <div class="button-view">
+                            <a href="#">VOIR PLUS</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="left-project">
+                        <img src="./src/assets/images/UR.png" alt="portfolio">
+                    </div>
+                    <div class="right-project">
+                        <div class="text-project">
+                            <h2>Unknow Reality</h2>
+                            <p class="description ">Une marque de vêtements en cours de développement, mêlant style audacieux et identité unique pour repousser les limites de la mode.</p>
+                            <p class="shlash">/</p>
+                            <p class="what">Design Marque</p>
+                            <p class="what">Graphisme</p>
+                            <p class="what">Projet Perso</p>
+                        </div>
+                        <div class="button-view">
+                            <a href="#">VOIR PLUS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function navigate(event, url) {
+                event.preventDefault(); 
+                const overlay = document.getElementById('overlay');
+                overlay.classList.add('active'); 
+    
+                setTimeout(() => {
+                    window.location.href = url; 
+                }, 1500); 
+            }
+        </script>
+    </body>
+</html>
