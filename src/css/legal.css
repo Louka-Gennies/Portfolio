@@ -1,0 +1,60 @@
+.legal-page.container {
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 8% 8% 4%;
+}
+
+.legal-hero h1 {
+    font-family: "League Gothic", sans-serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--white);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.legal-updated {
+    font-size: 0.85rem;
+    color: var(--light-gray);
+    margin-bottom: 2.5rem;
+}
+
+.legal-content {
+    max-width: 720px;
+    color: var(--light-gray);
+    line-height: 1.65;
+}
+
+.legal-content section {
+    margin-bottom: 2rem;
+}
+
+.legal-content h2 {
+    font-family: "League Gothic", sans-serif;
+    font-size: 1.75rem;
+    color: var(--white);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+}
+
+.legal-content p {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.legal-content a {
+    color: var(--royal-blue);
+}
+
+.legal-back {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--royal-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.legal-back:hover {
+    text-decoration: underline;
+}

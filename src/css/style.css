@@ -105,6 +105,39 @@ body {
     background-color: var(--royal-blue);
  }
 
+ .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+ }
+
+ .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 50px;
+    padding: 4px;
+    border-radius: 20px;
+    background-color: var(--nav-bg);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+ }
+
+ .lang-toggle span {
+    padding: 8px 14px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--light-gray);
+    transition: background-color 0.25s ease, color 0.25s ease;
+ }
+
+ .lang-toggle span.active {
+    background-color: var(--royal-blue);
+    color: var(--white);
+ }
+
  .blue-letter {
     color: var(--royal-blue);
  }

@@ -337,116 +337,170 @@ canvas {
    width: 100%;
 }
 
-.projects h2 {
-   font-family: "League Gothic";
-   font-size: 150px;
-   font-weight: 800;
-   margin-bottom: 20px;
+.projects-header {
+   margin-bottom: 2rem;
 }
 
-.carousel {
-   aspect-ratio: 990 / 460;
-   position: relative;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
+.projects-title-row {
    display: flex;
+   flex-wrap: wrap;
+   align-items: baseline;
+   gap: 0.35em;
+}
+
+.projects-title-row h2 {
+   font-family: "League Gothic", sans-serif;
+   font-size: clamp(4rem, 12vw, 8rem);
+   font-weight: 400;
+   line-height: 0.95;
+   margin: 0;
+}
+
+.projects-subtitle {
+   font-size: 1.15rem;
+   color: var(--light-gray);
+   margin-top: 0.75rem;
+}
+
+.home-books-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+   gap: 1.5rem;
+}
+
+.home-book-card {
+   display: flex;
+   flex-direction: column;
+   gap: 0.65rem;
+   text-decoration: none;
+   color: inherit;
+   transition: transform 0.25s ease;
+}
+
+a.home-book-card:hover {
+   transform: translateY(-4px);
+}
+
+.home-book-card--editing {
+   cursor: default;
+   opacity: 0.92;
+}
+
+.home-book-cover {
+   position: relative;
+   aspect-ratio: 4 / 5;
+   border-radius: 4px 12px 12px 4px;
    overflow: hidden;
-   border-radius: 20px;
+   background: var(--gray);
+   box-shadow: 8px 10px 32px rgba(0, 0, 0, 0.4);
 }
 
-.carousel-inner {
-   display: flex;
-   transition: transform 1s ease;
-   width: 100%;
-   height: 100%;
-}
-
-.carousel-item {
-   width: 100%;
-   height: 100%;
-   flex-shrink: 0;
-   position: relative;
-}
-
-.carousel img {
+.home-book-cover img {
    width: 100%;
    height: 100%;
    object-fit: cover;
-   flex-shrink: 0;
+   display: block;
 }
 
-.nav-btn {
-   position: absolute;
-   top: 50%;
-   transform: translateY(-50%);
-   cursor: pointer;
-   z-index: 2;
-   background: var(--black);
-   color: var(--white);
-   border: none;
-   padding: 10px 20px;
-   font-size: 18px;
-   border-radius: 5px;
-   font-family: "Host Grotesk", sans-serif;
+.home-book-cover[data-theme="nantes"] {
+   background: linear-gradient(145deg, #1e3a5f 0%, #111 60%);
 }
 
-.nav-btn.prev {
-   left: 20px;
+.home-book-cover[data-theme="stralsund"] {
+   background: linear-gradient(145deg, #4a3728 0%, #111 55%);
 }
 
-.nav-btn.next {
-   right: 20px;
+.home-book-cover[data-theme="portrait"] {
+   background: linear-gradient(145deg, #3d2c4a 0%, #111 55%);
 }
 
-.caption {
-   text-align: center;
-   margin-top: 20px;
-   font-size: 2rem;
-   color: var(--white);
-   opacity: 0;
-   transition: opacity 0.5s ease;
-   font-family: "Host Grotesk", sans-serif;
+.home-book-cover[data-theme="angers"] {
+   background: linear-gradient(145deg, #2c4a3e 0%, #111 55%);
 }
 
-.caption.visible {
-   opacity: 1;
+.home-book-cover[data-theme="zoo"] {
+   background: linear-gradient(145deg, #2a4a2a 0%, #111 55%);
 }
 
-.carousel .overlay-projet {
-   position: absolute;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   height: 50%;
-   background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+.home-book-cover--placeholder,
+.home-book-cover--instagram {
    display: flex;
-   align-items: flex-end;
+   flex-direction: column;
+   align-items: center;
    justify-content: center;
-   opacity: 0;
-   transition: opacity 0.3s ease;
+   padding: 1rem;
+   text-align: center;
 }
 
-.carousel img:hover + .overlay-projet {
-   opacity: 1;
+.home-book-cover--instagram {
+   background: linear-gradient(145deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
 }
 
-.overlay-projet:hover {
-   opacity: 1;
-}
-
-.overlay-projet p {
-   font-family: "Host Grotesk", sans-serif;
+.home-book-placeholder-title {
+   font-family: "League Gothic", sans-serif;
+   font-size: 1.5rem;
+   line-height: 1.1;
    color: var(--white);
-   font-size: 30px;
-   margin: 0;
+   z-index: 1;
 }
 
-.overlay-projet svg {
-   fill: var(--white);
-   height: 30px;
+.home-book-badge {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   font-size: 0.65rem;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.06em;
+   padding: 5px 8px;
+   border-radius: 4px;
+   background: rgba(255, 255, 255, 0.95);
+   color: #111;
+   z-index: 2;
+}
+
+.home-book-badge--raw {
+   background: rgba(74, 136, 252, 0.95);
+   color: var(--white);
+}
+
+.home-book-card h3 {
+   font-family: "League Gothic", sans-serif;
+   font-size: 1.65rem;
+   font-weight: 400;
    margin: 0;
+   line-height: 1.05;
+}
+
+.home-book-camera,
+.home-book-status {
+   font-size: 0.85rem;
+   color: var(--light-gray);
+   margin: 0;
+   line-height: 1.45;
+}
+
+.home-book-status {
+   color: var(--royal-blue);
+   font-weight: 500;
+}
+
+.projects-cta {
+   display: inline-block;
+   margin-top: 2rem;
+   padding: 14px 32px;
+   border-radius: 999px;
+   background: var(--royal-blue);
+   color: var(--white);
+   font-weight: 600;
+   font-size: 1rem;
+   text-decoration: none;
+   transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.projects-cta:hover {
+   transform: translateY(-2px);
+   opacity: 0.92;
 }
 
 .overlay-text {
@@ -507,42 +561,52 @@ canvas {
 }
 
 .contact-list {
-   width: fit-content;
+   width: 100%;
+   max-width: 440px;
+   flex-shrink: 0;
    background-color: var(--nav-bg);
-   padding: 1%;
+   padding: 1rem;
    border-radius: 20px;
+   box-sizing: border-box;
 }
 
 .contact-list ul {
    list-style-type: none;
    padding: 0;
    margin: 0;
-   height: 80%;
    display: flex;
    flex-direction: column;
-   gap: 8%;
+   gap: 0.75rem;
 }
 
 .contact-list ul li {
    display: flex;
    align-items: center;
-   gap: 20px;
-   font-size: 25px;
-   padding: 25px;
+   gap: 1rem;
+   width: 100%;
+   min-width: 0;
+   padding: 1.1rem 1.25rem;
    background-color: #2b2b2b;
    border-radius: 20px;
-   height: 25%;
+   box-sizing: border-box;
 }
 
 .contact-list ul li svg {
-   height: 20px;
+   flex-shrink: 0;
+   width: 22px;
+   height: 22px;
    fill: var(--royal-blue);
 }
 
 .contact-list ul li a {
+   flex: 1;
+   min-width: 0;
    text-decoration: none;
    color: var(--white);
-   font-size: 1.3rem;
+   font-size: 1.1rem;
+   line-height: 1.35;
+   overflow-wrap: anywhere;
+   word-break: break-word;
 }
 
 .contact-list ul li a:hover {
@@ -551,6 +615,17 @@ canvas {
 }
 
 .contact-list ul li p {
+   flex: 1;
+   min-width: 0;
+   margin: 0;
    color: var(--white);
-   font-size: 1.3rem;
+   font-size: 1.1rem;
+   line-height: 1.35;
+   overflow-wrap: anywhere;
+   word-break: break-word;
+}
+
+#about,
+#contact {
+   scroll-margin-top: 100px;
 }

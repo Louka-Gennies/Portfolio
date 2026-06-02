@@ -1,161 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Projet</title>
+        <meta name="robots" content="noindex, nofollow">
+        <title>Books photo — Louka Gennies</title>
         <link rel="preload" href="./src/css/projets.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="./src/css/footer.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="icon" href="./src/assets/ico/favicon.ico" />
     </head>
-    <body>
+    <body data-page-title="page.projetsTitle">
         <div class="overlay" id="overlay"></div>
         <nav class="navbar">
             <div class="logo" onclick="scrollToTop()">
                 <span>LG</span>
                 <span class="copyright">©</span>
             </div>
-            <div class="nav-links">
-                <a href="/home.html" id="home-link" onclick="navigate(event, '/home.html')">Accueil</a>
-                <a href="/projets.html" id="projects-link" class="active" onclick="navigate(event, '/projets.html')">Projets</a>
-                <a href="#about" id="about-link" onclick="navigate(event, '#about')">À Propos</a>
-                <a href="#contact" id="contact-link" onclick="navigate(event, '#contact')">Contact</a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="./home.html" id="home-link" onclick="navigate(event, './home.html')" data-i18n="nav.home">Accueil</a>
+                    <a href="./projets.html" id="projects-link" class="active" onclick="navigate(event, './projets.html')" data-i18n="nav.projects">Projets</a>
+                    <a href="./home.html#about" id="about-link" onclick="navigate(event, '#about')" data-i18n="nav.about">À propos</a>
+                    <a href="./home.html#contact" id="contact-link" onclick="navigate(event, '#contact')" data-i18n="nav.contact">Contact</a>
+                </div>
+                <button type="button" class="lang-toggle" aria-label="Changer de langue">
+                    <span data-lang="fr" class="active">FR</span>
+                    <span data-lang="en">EN</span>
+                </button>
             </div>
         </nav>
 
-        <div class="container">
-            <div class="text-top">
+        <div class="container projets-page">
+            <header class="projets-hero">
                 <div class="title-top">
-                    <h1>SHOWCAS</h1>
-                    <h1 class="blue-letter">E&nbsp;</h1>
-                    <h1>D</h1>
-                    <h1 class="blue-letter">E</h1>
-                    <h1>S PROJ</h1>
-                    <h1 class="blue-letter">E</h1>
-                    <h1>TS</h1>
+                    <h1 data-i18n="projets.hero1">BOOKS</h1>
+                    <h1 class="blue-letter" data-i18n="projets.hero2">PHOTO</h1>
                 </div>
+                <p class="projets-subtitle" data-i18n="projets.subtitle">Séries éditoriales & carnets visuels</p>
                 <div class="years">
                     <div class="years-numbers">
                         <h2>202</h2>
-                        <h2 class="blue-letter">4</h2>
+                        <h2 class="blue-letter">5</h2>
                         <h2>/2</h2>
-                        <h2 class="blue-letter">4</h2>
+                        <h2 class="blue-letter">6</h2>
                     </div>
                 </div>
+            </header>
+
+            <div class="social-strip projets-social-strip">
+                <p data-i18n="projets.social.instagram">Suivez mes publications photo sur Instagram</p>
+                <a href="https://www.instagram.com/louka.cr3/" class="social-instagram-btn" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.2 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.5 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-93-26.2-26.2-57.6-34.4-93-36.2-36.7-2.1-147.1-2.1-183.8 0-35.3 1.7-66.7 9.9-93 36.2s-34.4 57.6-36.2 93c-2.1 36.7-2.1 147.1 0 183.8 1.7 35.3 9.9 66.7 36.2 93s57.6 34.4 93 36.2c36.7 2.1 147.1 2.1 183.8 0 35.3-1.7 66.7-9.9 93-36.2 26.2-26.2 34.4-57.6 36.2-93 2.1-36.7 2.1-147.1 0-183.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                    <span data-i18n="social.instagram.handle">@louka.cr3</span>
+                </a>
             </div>
 
-            <div class="arrow-down">
-                <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.3.0/dist/dotlottie-wc.js" type="module"></script>
-                <dotlottie-wc src="https://lottie.host/e381e8f2-a193-4dfb-9920-b9314333958d/AG09kcn1D7.lottie" background="transparent" speed="1" style="aspect-ratio: 843 / 1920; width: auto; height: 200px" autoplay loop></dotlottie-wc>
+            <section id="books-gate" class="books-gate" aria-labelledby="books-gate-title">
+                <div class="books-gate-card">
+                    <h2 id="books-gate-title" data-i18n="books.gate.title">Accès restreint</h2>
+                    <p class="books-gate-notice" data-i18n="books.gate.notice">
+                        Ces books contiennent de la photographie de rue. L'accès est réservé aux personnes autorisées, dans le respect des personnes photographiées.
+                    </p>
+                    <form id="books-gate-form" class="books-gate-form" autocomplete="off">
+                        <label for="books-password" data-i18n="books.gate.label">Mot de passe</label>
+                        <input type="password" id="books-password" name="password" required autocomplete="current-password">
+                        <button type="submit" data-i18n="books.gate.submit">Accéder aux books</button>
+                    </form>
+                    <p id="books-gate-error" class="books-gate-error" role="alert" aria-live="polite"></p>
+                    <p class="books-gate-hint" data-i18n="books.gate.hint">Besoin d'un accès ? Contactez-moi via la page d'accueil.</p>
+                </div>
+            </section>
+
+            <div class="filter-bar" id="projets-filter-bar" role="tablist">
+                <button type="button" class="filter-chip active" data-filter="all" data-i18n="projets.filter.all">Tout</button>
+                <button type="button" class="filter-chip" data-filter="portrait" data-i18n="projets.filter.portrait">Portrait</button>
+                <button type="button" class="filter-chip" data-filter="street" data-i18n="projets.filter.street">Urbain</button>
+                <button type="button" class="filter-chip" data-filter="event" data-i18n="projets.filter.event">Événement</button>
+                <button type="button" class="filter-chip" data-filter="nature" data-i18n="projets.filter.nature">Nature</button>
+                <button type="button" class="filter-chip" data-filter="video" data-i18n="projets.filter.video">Vidéo</button>
+                <button type="button" class="filter-chip books-lock-btn" id="books-lock-btn" hidden data-i18n="books.gate.lock">Verrouiller</button>
             </div>
 
-            <div class="content">
-                <div class="project">
-                    <div class="left-project">
-                        <img src="./src/assets/images/Portfolio.png" alt="portfolio">
+            <div id="books-protected" hidden>
+            <div class="photo-books-grid">
+                <!-- Couvertures : ajoutez cover.jpg dans src/assets/images/books/[dossier]/ -->
+                <article class="photo-book" data-category="street" data-book-id="nantes-s100fs">
+                    <div class="book-cover book-cover--placeholder" data-theme="nantes">
+                        <span class="book-cover-label" data-i18n="projets.book1.title">Street — Nantes</span>
+                        <span class="book-cover-hint" data-i18n="projets.coverPlaceholder">Couverture à venir</span>
+                        <div class="book-spine"></div>
                     </div>
-                    <div class="right-project">
-                        <div class="text-project">
-                            <h2>Portfolio</h2>
-                            <p class="description ">Un portfolio interactif et élégant, mettant en lumière ma passion pour l'informatique et mes projets innovants.</p>
-                            <p class="shlash">/</p>
-                            <p class="what">Design Web</p>
-                            <p class="what">Projet Perso</p>
+                    <div class="book-info">
+                        <h2 data-i18n="projets.book1.title">Street — Nantes</h2>
+                        <p class="book-camera" data-i18n="projets.book1.camera">Fujifilm FinePix S100FS</p>
+                        <p class="book-desc" data-i18n="projets.book1.desc">Carnet de street photo à Nantes, lumière urbaine et scènes du quotidien.</p>
+                        <div class="book-tags">
+                            <span data-i18n="projets.book1.tag1">Street</span>
+                            <span data-i18n="projets.book1.tag2">Nantes</span>
                         </div>
-                        <div class="button-view">
-                            <a href="#">VOIR PLUS</a>
-                        </div>
+                        <button type="button" class="book-open-btn" data-i18n="projets.viewBook">Ouvrir le book</button>
                     </div>
-                </div>
+                    <div class="book-spreads" hidden aria-hidden="true"></div>
+                </article>
 
-                <div class="project">
-                    <div class="left-project">
-                        <img src="./src/assets/images/ChatHeaven.png" alt="portfolio">
+                <article class="photo-book" data-category="event street" data-book-id="stralsund-s100fs">
+                    <div class="book-cover book-cover--placeholder" data-theme="stralsund">
+                        <span class="book-cover-label" data-i18n="projets.book2.title">Fête médiévale — Stralsund</span>
+                        <span class="book-cover-hint" data-i18n="projets.coverPlaceholder">Couverture à venir</span>
+                        <div class="book-spine"></div>
                     </div>
-                    <div class="right-project">
-                        <div class="text-project">
-                            <h2>Chat Heaven</h2>
-                            <p class="description ">Un forum interactif et intuitif, favorisant des échanges fluides et une expérience utilisateur optimisée.</p>
-                            <p class="shlash">/</p>
-                            <p class="what">Design Web</p>
-                            <p class="what">Gestion BDD</p>
-                            <p class="what">Projet Scolaire</p>
+                    <div class="book-info">
+                        <h2 data-i18n="projets.book2.title">Fête médiévale — Stralsund</h2>
+                        <p class="book-camera" data-i18n="projets.book2.camera">Fujifilm FinePix S100FS</p>
+                        <p class="book-desc" data-i18n="projets.book2.desc">Reportage pendant une fête médiévale à Stralsund, Allemagne.</p>
+                        <div class="book-tags">
+                            <span data-i18n="projets.book2.tag1">Événement</span>
+                            <span data-i18n="projets.book2.tag2">Allemagne</span>
                         </div>
-                        <div class="button-view">
-                            <a href="#">VOIR PLUS</a>
-                        </div>
+                        <button type="button" class="book-open-btn" data-i18n="projets.viewBook">Ouvrir le book</button>
                     </div>
-                </div>
+                    <div class="book-spreads" hidden aria-hidden="true"></div>
+                </article>
 
-                <div class="project">
-                    <div class="left-project">
-                        <img src="./src/assets/images/GroopieTracker.png" alt="portfolio">
+                <article class="photo-book" data-category="portrait" data-book-id="autoportraits-r50">
+                    <div class="book-cover book-cover--placeholder" data-theme="portrait">
+                        <span class="book-cover-label" data-i18n="projets.book3.title">Autoportraits</span>
+                        <span class="book-cover-hint" data-i18n="projets.coverPlaceholder">Couverture à venir</span>
+                        <div class="book-spine"></div>
                     </div>
-                    <div class="right-project">
-                        <div class="text-project">
-                            <h2>Groopie Tracker</h2>
-                            <p class="description ">Un site dynamique pour explorer les tournées de vos artistes préférés, rester informé de leurs prochains concerts et revisiter leurs performances passées.</p>
-                            <p class="shlash">/</p>
-                            <p class="what">Design Web</p>
-                            <p class="what">Gestion API</p>
-                            <p class="what">Projet Scolaire</p>
+                    <div class="book-info">
+                        <h2 data-i18n="projets.book3.title">Autoportraits</h2>
+                        <p class="book-camera" data-i18n="projets.book3.camera">Canon EOS R50</p>
+                        <p class="book-desc" data-i18n="projets.book3.desc">Série d'autoportraits — exploration du cadre et de la lumière.</p>
+                        <div class="book-tags">
+                            <span data-i18n="projets.book3.tag1">Autoportrait</span>
+                            <span data-i18n="projets.book3.tag2">Portrait</span>
                         </div>
-                        <div class="button-view">
-                            <a href="#">VOIR PLUS</a>
-                        </div>
+                        <button type="button" class="book-open-btn" data-i18n="projets.viewBook">Ouvrir le book</button>
                     </div>
-                </div>
+                    <div class="book-spreads" hidden aria-hidden="true"></div>
+                </article>
 
-                <div class="project">
-                    <div class="left-project">
-                        <img src="./src/assets/images/SQL.png" alt="portfolio">
+                <article class="photo-book" data-category="street" data-book-id="angers-street-r50">
+                    <div class="book-cover book-cover--placeholder" data-theme="angers">
+                        <span class="book-cover-badge book-cover-badge--status book-cover-badge--raw" data-i18n="projets.tag.raw">RAW</span>
+                        <span class="book-cover-label" data-i18n="projets.book4.title">Street — Angers</span>
+                        <span class="book-cover-hint" data-i18n="projets.coverPlaceholder">Couverture à venir</span>
+                        <div class="book-spine"></div>
                     </div>
-                    <div class="right-project">
-                        <div class="text-project">
-                            <h2>Projet SQL</h2>
-                            <p class="description ">Un système de gestion d’employés optimisé avec SQL, permettant une organisation efficace des données et une analyse détaillée pour une meilleure prise de décision.</p>
-                            <p class="shlash">/</p>
-                            <p class="what">Design Web</p>
-                            <p class="what">Gestion BDD</p>
-                            <p class="what">Projet Scolaire</p>
+                    <div class="book-info">
+                        <h2 data-i18n="projets.book4.title">Street — Angers</h2>
+                        <p class="book-camera" data-i18n="projets.book4.camera">Canon EOS R50</p>
+                        <p class="book-desc" data-i18n="projets.book4.desc">Street photo à Angers : rues, passants et instants saisis. Fichiers RAW non retouchés, version finale en cours d'édition.</p>
+                        <div class="book-tags">
+                            <span data-i18n="projets.book4.tag1">Street</span>
+                            <span data-i18n="projets.book4.tag2">Angers</span>
+                            <span class="book-tag--muted" data-i18n="projets.tag.raw">RAW</span>
                         </div>
-                        <div class="button-view">
-                            <a href="#">VOIR PLUS</a>
-                        </div>
+                        <button type="button" class="book-open-btn" data-i18n="projets.viewBook">Ouvrir le book</button>
                     </div>
-                </div>
+                    <div class="book-spreads" hidden aria-hidden="true"></div>
+                </article>
 
-                <div class="project">
-                    <div class="left-project">
-                        <img src="./src/assets/images/UR.png" alt="portfolio">
+                <article class="photo-book" data-category="nature" data-book-id="zoo-doue-r50">
+                    <div class="book-cover book-cover--placeholder" data-theme="zoo">
+                        <span class="book-cover-badge book-cover-badge--status" data-i18n="projets.tag.editing">En édition</span>
+                        <span class="book-cover-label" data-i18n="projets.book5.title">Zoo — Doué-la-Fontaine</span>
+                        <span class="book-cover-hint" data-i18n="projets.coverPlaceholder">Couverture à venir</span>
+                        <div class="book-spine"></div>
                     </div>
-                    <div class="right-project">
-                        <div class="text-project">
-                            <h2>Unknow Reality</h2>
-                            <p class="description ">Une marque de vêtements en cours de développement, mêlant style audacieux et identité unique pour repousser les limites de la mode.</p>
-                            <p class="shlash">/</p>
-                            <p class="what">Design Marque</p>
-                            <p class="what">Graphisme</p>
-                            <p class="what">Projet Perso</p>
+                    <div class="book-info">
+                        <h2 data-i18n="projets.book5.title">Zoo — Doué-la-Fontaine</h2>
+                        <p class="book-camera" data-i18n="projets.book5.camera">Canon EOS R50</p>
+                        <p class="book-desc" data-i18n="projets.book5.desc">Journée au Bioparc de Doué-la-Fontaine. La série est en cours de retouche et n'est pas encore disponible en ligne.</p>
+                        <div class="book-tags">
+                            <span data-i18n="projets.book5.tag1">Nature</span>
+                            <span data-i18n="projets.book5.tag2">Zoo</span>
                         </div>
-                        <div class="button-view">
-                            <a href="#">VOIR PLUS</a>
-                        </div>
+                        <button type="button" class="book-open-btn" data-i18n="projets.viewBook">Ouvrir le book</button>
                     </div>
-                </div>
+                    <div class="book-spreads" hidden aria-hidden="true"></div>
+                </article>
+
+                <article class="photo-book photo-book--instagram" data-category="event street" data-book-id="manifestations-angers-2025">
+                    <div class="book-cover book-cover--placeholder book-cover--instagram-theme" data-theme="manifestations">
+                        <span class="book-cover-badge">Instagram</span>
+                        <span class="book-cover-label" data-i18n="projets.book6.title">Manifestations — Angers</span>
+                        <div class="book-spine"></div>
+                    </div>
+                    <div class="book-info">
+                        <h2 data-i18n="projets.book6.title">Manifestations — Angers</h2>
+                        <p class="book-camera" data-i18n="projets.book6.camera">Canon EOS R50</p>
+                        <p class="book-desc" data-i18n="projets.book6.desc">Reportage du 10 septembre 2025 à Angers. Fichiers originaux perdus ; publication restante sur Instagram.</p>
+                        <div class="book-tags">
+                            <span data-i18n="projets.book6.tag1">Reportage</span>
+                            <span data-i18n="projets.book6.tag2">10 sept. 2025</span>
+                            <span class="book-tag--muted" data-i18n="projets.book6.archive">Archive Instagram uniquement</span>
+                        </div>
+                        <a href="https://www.instagram.com/louka.cr3/" class="book-instagram-btn" target="_blank" rel="noopener noreferrer" data-i18n="projets.viewInstagram">Voir sur Instagram</a>
+                    </div>
+                </article>
             </div>
+            </div>
+
+            <section id="video-section" class="projets-video-section" aria-labelledby="video-section-title">
+                <header class="projets-video-header">
+                    <div class="title-top" id="video-section-title">
+                        <h2 data-i18n="projets.video.hero1">FILMS</h2>
+                        <h2 class="blue-letter" data-i18n="projets.video.hero2">& MONTAGE</h2>
+                    </div>
+                    <p class="projets-subtitle" data-i18n="projets.video.subtitle">Courts métrages, essais et montage DaVinci Resolve</p>
+                </header>
+                <article class="video-slot video-slot--empty">
+                    <div class="video-slot-frame" aria-hidden="true">
+                        <span class="video-slot-icon">▶</span>
+                    </div>
+                    <div class="video-slot-copy">
+                        <p class="video-slot-title" data-i18n="projets.video.empty">Aucun film publié pour le moment.</p>
+                        <p class="video-slot-hint" data-i18n="projets.video.emptyHint">Cet espace accueillera prochainement mes projets vidéo lorsque je choisirai de les partager.</p>
+                    </div>
+                </article>
+            </section>
         </div>
 
-        <script>
-            function navigate(event, url) {
-                event.preventDefault(); 
-                const overlay = document.getElementById('overlay');
-                overlay.classList.add('active'); 
-    
-                setTimeout(() => {
-                    window.location.href = url; 
-                }, 1500); 
-            }
-        </script>
+        <footer class="site-footer">
+            <p class="site-footer-copy" data-i18n="footer.copyright">© 2026 Louka Gennies</p>
+            <nav class="site-footer-nav" aria-label="Pied de page">
+                <a href="./legal.html" data-i18n="footer.legal">Mentions légales</a>
+                <a href="./home.html#contact" onclick="navigate(event, '#contact')" data-i18n="nav.contact">Contact</a>
+            </nav>
+        </footer>
+
+        <div class="book-lightbox" id="book-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+            <button type="button" class="lightbox-close" data-i18n-aria="projets.lightbox.close" aria-label="Fermer">&times;</button>
+            <header class="lightbox-header">
+                <h3 class="lightbox-title"></h3>
+                <p class="lightbox-counter" aria-live="polite"></p>
+            </header>
+            <div class="lightbox-notice" hidden></div>
+            <div class="lightbox-empty-state" hidden></div>
+            <div class="lightbox-viewer" hidden>
+                <button type="button" class="lightbox-nav lightbox-prev" data-i18n-aria="projets.lightbox.prev" aria-label="Photo précédente">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div class="lightbox-stage">
+                    <img class="lightbox-photo" alt="" decoding="async">
+                </div>
+                <button type="button" class="lightbox-nav lightbox-next" data-i18n-aria="projets.lightbox.next" aria-label="Photo suivante">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+            <div class="lightbox-progress" hidden>
+                <div class="lightbox-progress-fill"></div>
+            </div>
+            <p class="lightbox-hint" data-i18n="projets.lightbox.hint">Flèches · clic sur les côtés · glisser</p>
+        </div>
+
+        <script src="./src/js/book-access.config.js"></script>
+        <script src="./src/js/book-images.js"></script>
+        <script src="./src/js/i18n.js"></script>
+        <script src="./src/js/nav.js"></script>
+        <script src="./src/js/book-access.js"></script>
+        <script src="./src/js/book-loader.js"></script>
+        <script src="./src/js/projets.js"></script>
     </body>
 </html>

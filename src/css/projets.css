@@ -1,151 +1,832 @@
 @import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=League+Gothic&display=swap");
 
-.container {
+.projets-page.container {
     min-width: 100vw;
     max-width: 100vw;
     min-height: 100vh;
-    height: auto;
     margin: 0;
-    padding:10% 2% 0 2%;
+    padding: 8% 4% 6%;
 }
 
-.text-top {
-    width: 100%;
+.projets-hero {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
 }
 
-.text-top h1 {
-    font-family: "League Gothic";
-    font-size: 10rem;
-    color: var(--white);
-}
-
-.title-top {
+.projets-hero .title-top {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.title-top .blue-letter{
+.projets-hero h1 {
+    font-family: "League Gothic", sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    color: var(--white);
+    font-weight: 400;
+}
+
+.projets-hero .blue-letter {
     color: var(--royal-blue);
 }
 
-.years {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 10px;
+.projets-subtitle {
+    width: 100%;
+    font-size: 1.25rem;
+    color: var(--light-gray);
+    margin-top: 0.5rem;
+    padding-left: 4px;
 }
 
-.text-top .years .years-numbers {
+.projets-hero .years {
+    display: flex;
+    align-items: center;
+}
+
+.projets-hero .years-numbers {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
 }
 
-.text-top .years .years-numbers h2 {
-    font-size: 8rem;
+.projets-hero .years-numbers h2 {
+    font-family: "League Gothic", sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 100;
     color: var(--white);
 }
 
-.text-top .years .years-numbers .blue-letter {
-    color: var(--royal-blue);
- }
-
-.arrow-down {
-    margin-top: -50px;
+.books-gate {
+    margin: 2rem 0 4rem;
     display: flex;
-    align-items: start;
+    justify-content: center;
 }
 
-.content {
+/* L'attribut hidden seul ne suffit pas : display:flex ci-dessus le surcharge */
+.books-gate[hidden],
+#books-protected[hidden] {
+    display: none !important;
+}
+
+#books-protected:not([hidden]) {
+    display: block;
+}
+
+.books-gate-card {
+    max-width: 520px;
+    width: 100%;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    background: var(--nav-bg);
+    border: 1px solid var(--gray);
+    text-align: center;
+}
+
+.books-gate-card h2 {
+    font-family: "League Gothic", sans-serif;
+    font-size: 2.75rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.books-gate-notice {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--light-gray);
+    margin-bottom: 1.75rem;
+    text-align: left;
+}
+
+.books-gate-form {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 0.75rem;
+    text-align: left;
 }
 
-.project {
-    height: 50vh;
-    background-color: var(--white);
-    border-radius: 80px;
+.books-gate-form label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--light-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.books-gate-form input {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--gray);
+    background: var(--black);
+    color: var(--white);
+}
+
+.books-gate-form input:focus {
+    outline: 2px solid var(--royal-blue);
+    border-color: transparent;
+}
+
+.books-gate-form button[type="submit"] {
+    margin-top: 0.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px;
+    border: none;
+    border-radius: 999px;
+    background: var(--royal-blue);
+    color: var(--white);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.books-gate-form button[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+.books-gate-error {
+    min-height: 1.25rem;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: #f87171;
+}
+
+.books-gate-hint {
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+.books-lock-btn {
+    margin-left: auto;
+    border-color: var(--light-gray) !important;
+}
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2.5rem;
+    align-items: center;
+}
+
+.filter-chip {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: 1px solid var(--gray);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    background-color: var(--royal-blue);
+    border-color: var(--royal-blue);
+    color: var(--white);
+}
+
+.photo-books-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.photo-book {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.photo-book.hidden {
+    display: none;
+}
+
+.photo-book--wide {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 900px) {
+    .photo-book--wide {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .photo-book--wide .book-cover {
+        flex: 0 0 45%;
+        max-width: 520px;
+    }
+
+    .photo-book--wide .book-info {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+.book-cover {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 4px 12px 12px 4px;
     overflow: hidden;
+    box-shadow:
+        12px 12px 40px rgba(0, 0, 0, 0.45),
+        inset -8px 0 24px rgba(0, 0, 0, 0.15);
+    background: var(--gray);
+    transform: perspective(800px) rotateY(-4deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.left-project {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    margin: 0;
-    padding: 0;
+.photo-book:hover .book-cover {
+    transform: perspective(800px) rotateY(0deg);
+    box-shadow: 16px 20px 48px rgba(74, 136, 252, 0.2);
 }
 
-.left-project img {
+.book-cover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-.right-project {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 0.5fr;
-    padding: 30px;
-}
-
-.right-project h2 {
-    font-family: "League Gothic";
-    font-size: 6rem;
-    font-weight: 100;
-    color: var(--black);
-}
-
-.right-project .description {
-    font-size: 1.5rem;
-    font-weight: 100;
-    color: var(--black);
-}
-
-.right-project .shlash {
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--black);
-}
-
-.right-project .what {
-    font-size: 1.5rem;
-    font-weight: 100;
-    color: var(--black);
-}
-
-.button-view {
+.book-cover--placeholder {
     display: flex;
-    align-items: end;
-    justify-content: end;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 50%, #252525 100%);
 }
 
-.button-view a {
-    background-color: var(--black);
-    height: 120px;
-    width: 120px;
+.book-cover--placeholder[data-theme="nantes"] {
+    background: linear-gradient(145deg, #1e3a5f 0%, #111 60%);
+}
+
+.book-cover--placeholder[data-theme="stralsund"] {
+    background: linear-gradient(145deg, #4a3728 0%, #111 55%);
+}
+
+.book-cover--placeholder[data-theme="portrait"] {
+    background: linear-gradient(145deg, #3d2c4a 0%, #111 55%);
+}
+
+.book-cover--placeholder[data-theme="angers"] {
+    background: linear-gradient(145deg, #2c4a3e 0%, #111 55%);
+}
+
+.book-cover--placeholder[data-theme="zoo"] {
+    background: linear-gradient(145deg, #2a4a2a 0%, #111 55%);
+}
+
+.book-cover--instagram-theme {
+    background: linear-gradient(145deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+}
+
+.book-cover-label {
+    font-family: "League Gothic", sans-serif;
+    font-size: 2rem;
+    line-height: 1.05;
+    color: var(--white);
+    z-index: 1;
+}
+
+.book-cover-hint {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--light-gray);
+    z-index: 1;
+}
+
+.book-cover-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+    z-index: 2;
+}
+
+.book-camera {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--royal-blue);
+    letter-spacing: 0.02em;
+}
+
+.book-tag--muted {
+    border-style: dashed !important;
+    opacity: 0.85;
+}
+
+.book-instagram-btn {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #833ab4, #e1306c, #f77737);
+    color: var(--white);
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.book-instagram-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+.photo-book--instagram .book-open-btn {
+    display: none;
+}
+
+.lightbox-empty {
+    color: var(--white);
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.lightbox-empty-hint {
+    color: var(--light-gray);
+    font-size: 0.95rem;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.lightbox-notice {
+    width: min(640px, 92vw);
+}
+
+.lightbox-notice .lightbox-status-notice {
+    width: 100%;
+    margin: 0;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    background: rgba(74, 136, 252, 0.12);
+    border: 1px solid rgba(74, 136, 252, 0.45);
+    color: var(--light-gray);
+    font-size: 0.8rem;
+    line-height: 1.45;
+    text-align: center;
+}
+
+.book-status {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--royal-blue);
+    font-weight: 500;
+    margin: 0.25rem 0 0.5rem;
+}
+
+.book-pending {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--light-gray);
+    margin: 0.25rem 0 0.5rem;
+    font-style: italic;
+}
+
+.photo-book--editing {
+    opacity: 0.88;
+}
+
+.photo-book--editing .book-open-btn {
+    display: none;
+}
+
+.book-cover-badge--status {
+    background: rgba(74, 136, 252, 0.95);
+    color: var(--white);
+}
+
+.book-cover-badge--raw {
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+}
+
+.book-cover:has(> img) .book-cover-badge--status,
+.book-cover:has(> img) .book-cover-badge--raw {
+    z-index: 2;
+}
+
+.book-spine {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 14px;
+    background: linear-gradient(90deg, #0a0a0a 0%, #2a2a2a 40%, #1a1a1a 100%);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.book-pages {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(17, 17, 17, 0.75);
+    padding: 6px 10px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0 4px;
+}
+
+.book-info h2 {
+    font-family: "League Gothic", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1;
+}
+
+.book-desc {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--light-gray);
+    max-width: 42ch;
+}
+
+.book-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.book-tags span {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--gray);
+    color: var(--light-gray);
+}
+
+.book-open-btn {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 999px;
+    background-color: var(--white);
+    color: var(--black);
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.book-open-btn:hover {
+    background-color: var(--royal-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.book-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: radial-gradient(ellipse at 50% 30%, #1a2438 0%, #0d0d0d 55%, #000 100%);
+    display: grid;
+    grid-template-rows: auto auto 1fr auto auto;
+    align-items: center;
+    justify-items: center;
+    padding: 1.25rem 1rem 1.5rem;
+    gap: 0.75rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    overflow: hidden;
+}
+
+.book-lightbox.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.book-lightbox--viewer {
+    cursor: default;
+}
+
+.lightbox-close {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.85);
+    border: 1px solid var(--gray);
+    color: var(--white);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2001;
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-header {
+    text-align: center;
+    padding-top: 2.5rem;
+    z-index: 1;
+}
+
+.lightbox-title {
+    font-family: "League Gothic", sans-serif;
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    color: var(--white);
+    margin: 0;
+    line-height: 1;
+}
+
+.lightbox-counter {
+    margin: 0.35rem 0 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--royal-blue);
+}
+
+.lightbox-notice,
+.lightbox-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    max-width: 520px;
+    padding: 0 1rem;
+}
+
+.lightbox-notice[hidden],
+.lightbox-empty-state[hidden],
+.lightbox-viewer[hidden],
+.lightbox-progress[hidden] {
+    display: none !important;
+}
+
+.lightbox-viewer {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 1.5rem);
+    width: 100%;
+    max-width: min(1400px, 100%);
+    height: 100%;
+    min-height: 0;
+}
+
+.lightbox-stage {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    color: var(--white);
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    rotate: 30deg;
-    transition: rotate 0.3s ease, scale 0.3s ease-in-out;
-    scale: 1;
+    min-height: 0;
+    height: min(72vh, calc(100dvh - 11rem));
+    width: 100%;
+    cursor: pointer;
 }
 
-.button-view a:hover {
-    rotate: 0deg;
-    scale: 1.1;
+.lightbox-photo {
+    display: block;
+    max-width: 100%;
+    max-height: min(72vh, calc(100dvh - 11rem));
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 2px;
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+    opacity: 0;
+    transform: scale(0.97);
+    transition:
+        opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lightbox-photo.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.lightbox-photo.is-entering-next {
+    transform: translateX(12px) scale(0.98);
+}
+
+.lightbox-photo.is-entering-prev {
+    transform: translateX(-12px) scale(0.98);
+}
+
+.lightbox-nav {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--gray);
+    border-radius: 50%;
+    background: rgba(17, 17, 17, 0.75);
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.lightbox-nav:hover:not(:disabled) {
+    background: var(--royal-blue);
+    border-color: var(--royal-blue);
+}
+
+.lightbox-nav:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+.lightbox-nav svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lightbox-progress {
+    width: min(420px, 70vw);
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+}
+
+.lightbox-progress-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--royal-blue), #7eb0ff);
+    border-radius: inherit;
+    transition: width 0.35s ease;
+}
+
+.lightbox-hint {
+    margin: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    text-align: center;
+}
+
+.book-lightbox:not(.book-lightbox--viewer) .lightbox-hint {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .lightbox-nav {
+        position: fixed;
+        bottom: 2.5rem;
+        z-index: 2001;
+    }
+
+    .lightbox-prev {
+        left: 1rem;
+    }
+
+    .lightbox-next {
+        right: 1rem;
+    }
+
+    .lightbox-viewer {
+        grid-template-columns: 1fr;
+    }
+
+    .lightbox-stage {
+        height: min(68vh, calc(100dvh - 10rem));
+    }
+
+    .lightbox-photo {
+        max-height: min(68vh, calc(100dvh - 10rem));
+    }
+}
+
+.projets-social-strip {
+    margin-bottom: 2rem;
+}
+
+.filter-hidden {
+    display: none !important;
+}
+
+.projets-video-section {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray);
+}
+
+.projets-video-header {
+    margin-bottom: 2rem;
+}
+
+.projets-video-header .title-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+}
+
+.projets-video-header h2 {
+    font-family: "League Gothic", sans-serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    line-height: 0.9;
+    color: var(--white);
+    font-weight: 400;
+}
+
+.video-slot {
+    display: grid;
+    grid-template-columns: minmax(200px, 320px) 1fr;
+    gap: 2rem;
+    align-items: center;
+    max-width: 900px;
+}
+
+.video-slot--empty {
+    opacity: 0.92;
+}
+
+.video-slot-frame {
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1a1a2e 0%, #111 60%);
+    border: 1px dashed var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-slot-icon {
+    font-size: 2.5rem;
+    color: var(--gray);
+    opacity: 0.6;
+}
+
+.video-slot-title {
+    font-family: "League Gothic", sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    margin: 0 0 0.75rem;
+    line-height: 1.1;
+}
+
+.video-slot-hint {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--light-gray);
+}
+
+@media (max-width: 768px) {
+    .video-slot {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-books-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .book-cover {
+        transform: none;
+    }
 }

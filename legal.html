@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex, nofollow">
+        <title>Mentions légales — Louka Gennies</title>
+        <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="./src/css/footer.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="./src/css/legal.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" href="./src/assets/ico/favicon.ico" />
+    </head>
+    <body data-page-title="page.legalTitle">
+        <div class="overlay" id="overlay"></div>
+        <nav class="navbar">
+            <div class="logo" onclick="scrollToTop()">
+                <span>LG</span>
+                <span class="copyright">©</span>
+            </div>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="./home.html" id="home-link" onclick="navigate(event, './home.html')" data-i18n="nav.home">Accueil</a>
+                    <a href="./projets.html" id="projects-link" onclick="navigate(event, './projets.html')" data-i18n="nav.projects">Projets</a>
+                    <a href="./home.html#about" id="about-link" onclick="navigate(event, '#about')" data-i18n="nav.about">À propos</a>
+                    <a href="./home.html#contact" id="contact-link" onclick="navigate(event, '#contact')" data-i18n="nav.contact">Contact</a>
+                </div>
+                <button type="button" class="lang-toggle" aria-label="Changer de langue">
+                    <span data-lang="fr" class="active">FR</span>
+                    <span data-lang="en">EN</span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container legal-page">
+            <header class="legal-hero">
+                <h1 data-i18n="legal.title">Mentions légales</h1>
+                <p class="legal-updated" data-i18n="legal.updated">Dernière mise à jour : juin 2026</p>
+            </header>
+
+            <div class="legal-content">
+                <section>
+                    <h2 data-i18n="legal.editor.title">Éditeur du site</h2>
+                    <p data-i18n="legal.editor.body">Le site est édité par Louka Gennies, portfolio personnel. Contact : louka.gen@gmail.com — 07 68 12 00 06.</p>
+                </section>
+                <section>
+                    <h2 data-i18n="legal.hosting.title">Hébergement</h2>
+                    <p data-i18n="legal.hosting.body">Ce site est publié en ligne via un service d'hébergement web statique (par ex. GitHub Pages ou équivalent). L'hébergeur traite les données techniques nécessaires à la consultation des pages (adresse IP, logs serveur) conformément à sa propre politique de confidentialité.</p>
+                </section>
+                <section>
+                    <h2 data-i18n="legal.data.title">Données personnelles</h2>
+                    <p data-i18n="legal.data.body1">Aucun formulaire de contact n'est intégré au site : les coordonnées affichées le sont volontairement pour permettre de me joindre. Aucune donnée n'est vendue ni cédée à des tiers à des fins commerciales.</p>
+                    <p data-i18n="legal.data.body2">Conformément au RGPD, vous pouvez demander l'accès, la rectification ou la suppression de données vous concernant en écrivant à louka.gen@gmail.com.</p>
+                </section>
+                <section>
+                    <h2 data-i18n="legal.cookies.title">Cookies & stockage local</h2>
+                    <p data-i18n="legal.cookies.body">Le site enregistre votre préférence de langue dans le stockage local du navigateur (localStorage). Des ressources tierces peuvent être chargées (polices Google Fonts, animation Lottie via unpkg.com). Aucun outil de mesure d'audience (type Google Analytics) n'est utilisé à ce jour.</p>
+                </section>
+                <section>
+                    <h2 data-i18n="legal.ip.title">Propriété intellectuelle</h2>
+                    <p data-i18n="legal.ip.body">Les photographies, textes et éléments graphiques de ce portfolio sont la propriété de Louka Gennies, sauf mention contraire. Toute reproduction ou diffusion des images des books protégés sans autorisation est interdite.</p>
+                </section>
+                <section>
+                    <h2 data-i18n="legal.credits.title">Crédits</h2>
+                    <p data-i18n="legal.credits.body">Conception et développement du site : Louka Gennies. Icônes : Font Awesome (licence libre).</p>
+                </section>
+            </div>
+
+            <a href="./home.html" class="legal-back" data-i18n="legal.back">← Retour à l'accueil</a>
+        </div>
+
+        <footer class="site-footer">
+            <p class="site-footer-copy" data-i18n="footer.copyright">© 2026 Louka Gennies</p>
+            <nav class="site-footer-nav" aria-label="Pied de page">
+                <a href="./legal.html" data-i18n="footer.legal">Mentions légales</a>
+                <a href="./home.html#contact" onclick="navigate(event, '#contact')" data-i18n="nav.contact">Contact</a>
+            </nav>
+        </footer>
+
+        <script src="./src/js/i18n.js"></script>
+        <script src="./src/js/nav.js"></script>
+    </body>
+</html>

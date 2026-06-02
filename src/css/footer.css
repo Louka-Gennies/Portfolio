@@ -1,0 +1,103 @@
+.site-footer {
+    width: 100%;
+    padding: 2.5rem 8% 3rem;
+    border-top: 1px solid var(--gray);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.site-footer-copy {
+    font-size: 0.85rem;
+    color: var(--light-gray);
+    margin: 0;
+}
+
+.site-footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+.site-footer-nav a {
+    font-size: 0.85rem;
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-footer-nav a:hover {
+    color: var(--royal-blue);
+}
+
+.social-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    background: var(--nav-bg);
+    border: 1px solid var(--gray);
+}
+
+.social-strip p {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--light-gray);
+    max-width: 36rem;
+    line-height: 1.5;
+}
+
+.social-instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #833ab4, #e1306c, #f77737);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-instagram-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+.social-instagram-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.home-video-teaser {
+    display: block;
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    border: 1px dashed var(--gray);
+    color: var(--light-gray);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.home-video-teaser:hover {
+    border-color: var(--royal-blue);
+    color: var(--white);
+}
+
+.home-video-teaser strong {
+    color: var(--royal-blue);
+    font-weight: 600;
+}

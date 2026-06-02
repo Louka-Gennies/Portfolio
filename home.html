@@ -3,12 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Accueil</title>
+        <meta name="description" content="Portfolio photo de Louka Gennies — street, reportage, portrait et books éditoriaux.">
+        <meta property="og:title" content="Louka Gennies — Portfolio photo">
+        <meta property="og:description" content="Portfolio photo de Louka Gennies — street, reportage, portrait et books éditoriaux.">
+        <meta property="og:type" content="website">
+        <title>Accueil — Louka Gennies</title>
         <link rel="preload" href="./src/css/acceuil.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="./src/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="./src/css/footer.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="icon" href="./src/assets/ico/favicon.ico" />
     </head>
-    <body class="hidden">
+    <body class="hidden" data-page-title="page.homeTitle" data-page-description="page.homeDescription">
         <div class="overlay" id="overlay"></div>
         <div id="intro-screen">
             <h1 class="text-appear">
@@ -141,20 +146,26 @@
                 <span>LG</span>
                 <span class="copyright">©</span>
             </div>
-            <div class="nav-links">
-                <a href="/home.html" id="home-link" class="active" onclick="navigate(event, '/home.html')">Accueil</a>
-                <a href="/projets.html" id="projects-link" onclick="navigate(event, '/projets.html')">Projets</a>
-                <a href="#about" id="about-link" onclick="navigate(event, '#about')">À Propos</a>
-                <a href="#contact" id="contact-link" onclick="navigate(event, '#contact')">Contact</a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="./home.html" id="home-link" class="active" onclick="navigate(event, './home.html')" data-i18n="nav.home">Accueil</a>
+                    <a href="./projets.html" id="projects-link" onclick="navigate(event, './projets.html')" data-i18n="nav.projects">Projets</a>
+                    <a href="#about" id="about-link" onclick="navigate(event, '#about')" data-i18n="nav.about">À propos</a>
+                    <a href="#contact" id="contact-link" onclick="navigate(event, '#contact')" data-i18n="nav.contact">Contact</a>
+                </div>
+                <button type="button" class="lang-toggle" aria-label="Changer de langue">
+                    <span data-lang="fr" class="active">FR</span>
+                    <span data-lang="en">EN</span>
+                </button>
             </div>
         </nav>
         <div class="container">
             <div class="content">
                 <div>
                     <div class="word-slider">
-                        <div class="word">Créatif</div>
-                        <div class="word">Innovant</div>
-                        <div class="word">Passionné</div>
+                        <div class="word" data-i18n="hero.word1">Créatif</div>
+                        <div class="word" data-i18n="hero.word2">Innovant</div>
+                        <div class="word" data-i18n="hero.word3">Passionné</div>
                     </div>
                     <div class="name-title">
                         <div class="name">
@@ -170,7 +181,7 @@
                     </div>
                 </div>
                 <div class="scroll-icon">
-                    <div>Scroll</div>
+                    <div data-i18n="hero.scroll">Défiler</div>
                     <div class="chevron">
                         <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
                         <dotlottie-player src="https://lottie.host/0c5bd5d8-fab8-45e0-83d5-dd9f4e461617/3aX5DTkdo1.lottie" background="transparent" speed="1" style="width: 100px; height: 50px" loop autoplay></dotlottie-player>
@@ -178,121 +189,112 @@
                 </div>
                 <div class="spacer"></div>
             </div>
-            <div class="bio-section">
+            <section class="bio-section" id="about">
                 <div class="bio">
-                    <p>
-                        "Engagé et à l’écoute, je suis toujours prêt à approfondir mes compétences en développement web. Mon expérience m’a permis de contribuer à des projets variés, principalement axés sur le développement de sites et plateformes web, avec un intérêt marqué pour l’amélioration continue des interfaces et des fonctionnalités."
+                    <p data-i18n="bio.p1">
+                        Passionné par l'audiovisuel et la production d'images, je crée des contenus visuels captivants. Mon expérience m'a permis de développer des compétences en montage vidéo, tournage et photographie, avec un regard créatif pour raconter des histoires par l'image.
                     </p>
-                    <p>
-                        "Curieux et adaptable, je reste à jour sur les avancées technologiques pour enrichir constamment mon expertise. J’apprécie le travail en équipe tout en sachant être autonome pour mener les projets à bien de manière efficace et rigoureuse."
+                    <p data-i18n="bio.p2">
+                        Curieux et en quête d'innovation, je me tiens au courant des dernières technologies audiovisuelles. J'apprécie la collaboration tout en sachant travailler en autonomie pour mener des projets créatifs avec rigueur.
+                    </p>
+                    <p data-i18n="bio.p3">
+                        Basé en France, je développe un regard de photographe autour du street, du reportage et du portrait. Ouvert aux stages, collaborations et commandes photo — écrivez-moi pour en discuter.
                     </p>
                 </div>
                 <div class="competences">
-                    <h2>COMPÉTENCES</h2>
+                    <h2 data-i18n="skills.title">COMPÉTENCES</h2>
+                    <div class="competence-category" onclick="toggleDescription('audiovisuel', this)">
+                        <h3><span class="chevron">&#x276F;</span> <span data-i18n="skills.av.title">Audiovisuel & image</span></h3>
+                        <p id="audiovisuel" class="description hidden" data-i18n="skills.av.desc">
+                            Autodidacte en tournage et photographie, je capture vidéos et photos dans divers contextes, puis assure la post-production avec DaVinci Resolve (montage et étalonnage).
+                        </p>
+                    </div>
                     <div class="competence-category" onclick="toggleDescription('web', this)">
-                        <h3><span class="chevron">&#x276F;</span> Développement Web</h3>
-                        <p id="web" class="description hidden">
-                            Développeur web polyvalent, je maîtrise le front-end avec HTML, CSS et JavaScript, et possède des compétences en gestion de sites WordPress. En back-end, j’ai une expérience solide avec Node.js et Golang. Mon approche consiste à concevoir des solutions complètes, performantes et adaptées aux besoins des utilisateurs.
-                        </p>
-                    </div>
-                    <div class="competence-category" onclick="toggleDescription('data', this)">
-                        <h3><span class="chevron">&#x276F;</span> Data</h3>
-                        <p id="data" class="description hidden">
-                            Je travaille sur la gestion et la transformation des données en utilisant Python (Pandas, NumPy) et SQL. Je m'intéresse à la création de solutions simples et efficaces pour traiter et organiser les données.
-                        </p>
-                    </div>
-                    <div class="competence-category" onclick="toggleDescription('IA', this)">
-                        <h3><span class="chevron">&#x276F;</span> Intelligence Artificielle</h3>
-                        <p id="IA" class="description hidden">
-                            En apprentissage dans le domaine de l’intelligence artificielle, je réalise des projets personnels pour explorer le machine learning avec Python (Neat). J’approfondis mes connaissances tout en expérimentant des concepts fondamentaux pour développer mes compétences.
+                        <h3><span class="chevron">&#x276F;</span> <span data-i18n="skills.web.title">Web design (temps libre)</span></h3>
+                        <p id="web" class="description hidden" data-i18n="skills.web.desc">
+                            En temps libre, j'explore le web design (HTML, CSS, JavaScript) pour créer des interfaces modernes et responsives, en transposant mon sens visuel photo/vidéo sur le web.
                         </p>
                     </div>
                 </div>
+            </section>
                 <div class="spacer-2"></div>
-                <div class="projects">
-                    <h2>PROJETS</h2>
-                    <div class="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item">
-                                <img src="./src/assets/images/Portfolio.png" alt="Portfolio">
-                                <div class="overlay-projet">
-                                    <div class="overlay-text">
-                                        <p>En savoir plus</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./src/assets/images/GroopieTracker.png" alt="GroopieTracker">
-                                <div class="overlay-projet">
-                                    <div class="overlay-text">
-                                        <p>En savoir plus</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./src/assets/images/ChatHeaven.png" alt="ChatHeaven">
-                                <div class="overlay-projet">
-                                    <div class="overlay-text">
-                                        <p>En savoir plus</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./src/assets/images/SQL.png" alt="Système de Gestion des Employés">
-                                <div class="overlay-projet">
-                                    <div class="overlay-text">
-                                        <p>En savoir plus</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./src/assets/images/UR.png" alt="Unknown Reality">
-                                <div class="overlay-projet">
-                                    <div class="overlay-text">
-                                        <p>En savoir plus</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                <section class="projects" id="projects">
+                    <header class="projects-header">
+                        <div class="projects-title-row">
+                            <h2 data-i18n="projects.title">BOOKS</h2>
+                            <h2 class="blue-letter" data-i18n="projects.titleAccent">PHOTO</h2>
                         </div>
-                        <button class="nav-btn prev">Prev</button>
-                        <button class="nav-btn next">Next</button>
+                        <p class="projects-subtitle" data-i18n="projects.subtitle">Séries éditoriales & carnets visuels</p>
+                    </header>
+                    <div class="social-strip">
+                        <p data-i18n="social.instagram.lead">D'autres séries et archives sont publiées sur Instagram.</p>
+                        <a href="https://www.instagram.com/louka.cr3/" class="social-instagram-btn" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.2 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.5 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-93-26.2-26.2-57.6-34.4-93-36.2-36.7-2.1-147.1-2.1-183.8 0-35.3 1.7-66.7 9.9-93 36.2s-34.4 57.6-36.2 93c-2.1 36.7-2.1 147.1 0 183.8 1.7 35.3 9.9 66.7 36.2 93s57.6 34.4 93 36.2c36.7 2.1 147.1 2.1 183.8 0 35.3-1.7 66.7-9.9 93-36.2 26.2-26.2 34.4-57.6 36.2-93 2.1-36.7 2.1-147.1 0-183.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                            <span data-i18n="social.instagram.handle">@louka.cr3</span>
+                        </a>
                     </div>
-                    <div class="caption">
-                        <p id="carousel-text">Texte pour l'image 1</p>
+                    <div class="home-books-grid">
+                        <a href="./projets.html" class="home-book-card" data-book-id="nantes-s100fs">
+                            <div class="home-book-cover" data-theme="nantes">
+                                <img src="./src/assets/images/books/nantes-s100fs/cover.jpg" alt="" loading="lazy">
+                            </div>
+                            <h3 data-i18n="projets.book1.title">Street — Nantes</h3>
+                            <p class="home-book-camera" data-i18n="projets.book1.camera">Fujifilm FinePix S100FS</p>
+                        </a>
+                        <a href="./projets.html" class="home-book-card" data-book-id="stralsund-s100fs">
+                            <div class="home-book-cover" data-theme="stralsund">
+                                <img src="./src/assets/images/books/stralsund-s100fs/cover.jpg" alt="" loading="lazy">
+                            </div>
+                            <h3 data-i18n="projets.book2.title">Fête médiévale — Stralsund</h3>
+                            <p class="home-book-camera" data-i18n="projets.book2.camera">Fujifilm FinePix S100FS</p>
+                        </a>
+                        <a href="./projets.html" class="home-book-card" data-book-id="autoportraits-r50">
+                            <div class="home-book-cover" data-theme="portrait">
+                                <img src="./src/assets/images/books/autoportraits-r50/cover.jpg" alt="" loading="lazy">
+                            </div>
+                            <h3 data-i18n="projets.book3.title">Autoportraits</h3>
+                            <p class="home-book-camera" data-i18n="projets.book3.camera">Canon EOS R50</p>
+                        </a>
+                        <a href="./projets.html" class="home-book-card home-book-card--raw" data-book-id="angers-street-r50">
+                            <div class="home-book-cover" data-theme="angers">
+                                <span class="home-book-badge home-book-badge--raw" data-i18n="projets.tag.raw">RAW</span>
+                                <img src="./src/assets/images/books/angers-street-r50/cover.JPG" alt="" loading="lazy">
+                            </div>
+                            <h3 data-i18n="projets.book4.title">Street — Angers</h3>
+                            <p class="home-book-camera" data-i18n="projets.book4.camera">Canon EOS R50</p>
+                        </a>
+                        <div class="home-book-card home-book-card--editing" data-book-id="zoo-doue-r50">
+                            <div class="home-book-cover home-book-cover--placeholder" data-theme="zoo">
+                                <span class="home-book-badge" data-i18n="projets.tag.editing">En édition</span>
+                                <span class="home-book-placeholder-title" data-i18n="projets.book5.title">Zoo — Doué-la-Fontaine</span>
+                            </div>
+                            <h3 data-i18n="projets.book5.title">Zoo — Doué-la-Fontaine</h3>
+                            <p class="home-book-status" data-i18n="projets.status.editing">Série en cours d'édition — photos non publiées sur le site.</p>
+                        </div>
+                        <a href="./projets.html" class="home-book-card home-book-card--instagram" data-book-id="manifestations-angers-2025">
+                            <div class="home-book-cover home-book-cover--instagram" data-theme="manifestations">
+                                <span class="home-book-badge" data-i18n="projets.tag.instagram">Instagram</span>
+                                <span class="home-book-placeholder-title" data-i18n="projets.book6.title">Manifestations — Angers</span>
+                            </div>
+                            <h3 data-i18n="projets.book6.title">Manifestations — Angers</h3>
+                            <p class="home-book-camera" data-i18n="projets.book6.archive">Archive Instagram uniquement</p>
+                        </a>
                     </div>
-                </div>
+                    <a href="./projets.html" class="projects-cta" onclick="navigate(event, './projets.html')" data-i18n="projects.viewAll">Voir tous les books</a>
+                    <a href="./projets.html#video-section" class="home-video-teaser" onclick="navigate(event, './projets.html#video-section')" data-i18n="projects.videoTeaser">Section audiovisuel sur la page Projets — bientôt un premier film.</a>
+                </section>
                 <div class="spacer-2"></div>
-                <div class="contact">
-                    <h2>Contact</h2>
+                <section class="contact" id="contact">
+                    <h2 data-i18n="contact.title">Contact</h2>
                     <div class="contact-content">
                         <div class="contact-text">
                             <div class="title-contact-text">
-                                <h3 class="blue-letter">E</h3>
-                                <h3>nter en&nbsp;</h3>
-                                <h3 class="blue-letter">C</h3>
-                                <h3>ontact</h3>
+                                <h3 class="blue-letter">G</h3>
+                                <h3>et in&nbsp;</h3>
+                                <h3 class="blue-letter">T</h3>
+                                <h3>ouch</h3>
                             </div>
-                            <p>Merci de visiter mon portfolio ! Si vous êtes intéressé par mon travail, souhaitez discuter d’un projet ou en savoir plus sur mes compétences, je serais heureux de vous répondre.</p>
+                            <p data-i18n="contact.intro">Merci de visiter mon portfolio ! Si mon travail vous intéresse, pour discuter d'un projet ou en savoir plus sur mes compétences, n'hésitez pas à me contacter.</p>
                         </div>
                         <div class="contact-list">
                             <ul>
@@ -301,7 +303,7 @@
                                         <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                         <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
                                     </svg>
-                                    <p>louka.gen@gmail.com.com</p>
+                                    <p>louka.gen@gmail.com</p>
                                 </li>
                                 <li class="phone">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -309,6 +311,12 @@
                                         <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>
                                     </svg>
                                     <p>07 68 12 00 06</p>
+                                </li>
+                                <li class="instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.2 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.5 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-93-26.2-26.2-57.6-34.4-93-36.2-36.7-2.1-147.1-2.1-183.8 0-35.3 1.7-66.7 9.9-93 36.2s-34.4 57.6-36.2 93c-2.1 36.7-2.1 147.1 0 183.8 1.7 35.3 9.9 66.7 36.2 93s57.6 34.4 93 36.2c36.7 2.1 147.1 2.1 183.8 0 35.3-1.7 66.7-9.9 93-36.2 26.2-26.2 34.4-57.6 36.2-93 2.1-36.7 2.1-147.1 0-183.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                                    </svg>
+                                    <a href="https://www.instagram.com/louka.cr3/" target="_blank" rel="noopener noreferrer">instagram.com/louka.cr3</a>
                                 </li>
                                 <li class="linkedln">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -327,10 +335,19 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </section>
                 <div class="spacer-2"></div>
             </div>
         </div>
+        <footer class="site-footer">
+            <p class="site-footer-copy" data-i18n="footer.copyright">© 2026 Louka Gennies</p>
+            <nav class="site-footer-nav" aria-label="Pied de page">
+                <a href="./legal.html" data-i18n="footer.legal">Mentions légales</a>
+                <a href="#contact" onclick="navigate(event, '#contact')" data-i18n="nav.contact">Contact</a>
+            </nav>
+        </footer>
+        <script src="./src/js/i18n.js"></script>
+        <script src="./src/js/nav.js"></script>
         <script>
             if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
@@ -380,13 +397,6 @@
                 }
             });
             
-            function scrollToTop() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
-            
             function toggleDescription(id, element) {
               const description = document.getElementById(id);
               description.classList.toggle('hidden');
@@ -395,55 +405,6 @@
               chevron.classList.toggle('rotated');
             }
             
-            const carouselInner = document.querySelector('.carousel-inner');
-            const images = document.querySelectorAll('.carousel img');
-            const nextBtn = document.querySelector('.nav-btn.next');
-            const prevBtn = document.querySelector('.nav-btn.prev');
-            const captionText = document.getElementById('carousel-text');
-            const captionContainer = document.querySelector('.caption');
-            
-            let index = 0;
-            
-            const captions = [
-               "Mon Portfolio",
-               "Groopie Tracker",
-               "Chat Heaven",
-               "Système de Gestion des Employés",
-               "Unknown Reality"
-            ];
-            
-            function updateCarousel() {
-               const offset = -index * 100; 
-               carouselInner.style.transform = `translateX(${offset}%)`;
-            
-               captionContainer.classList.remove('visible');
-               setTimeout(() => {
-                  captionText.textContent = captions[index]; 
-                  captionContainer.classList.add('visible'); 
-               }, 500); 
-            }
-            
-            nextBtn.addEventListener('click', () => {
-               index = (index + 1) % images.length; 
-               updateCarousel();
-            });
-            
-            prevBtn.addEventListener('click', () => {
-               index = (index - 1 + images.length) % images.length;
-               updateCarousel();
-            });
-            
-            updateCarousel();
-
-            function navigate(event, url) {
-                event.preventDefault(); 
-                const overlay = document.getElementById('overlay');
-                overlay.classList.add('active'); 
-    
-                setTimeout(() => {
-                    window.location.href = url; 
-                }, 1500); 
-            }
         </script>
     </body>
 </html>
