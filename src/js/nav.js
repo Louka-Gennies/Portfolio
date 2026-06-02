@@ -1,9 +1,16 @@
-const HOME_PATH = './home.html';
+const HOME_PATH = './';
 const SECTION_OFFSET = 80;
 
 function isHomePage() {
   const path = window.location.pathname.toLowerCase();
-  return path.endsWith('home.html') || path.endsWith('/') || path.endsWith('/portfolio/') || path.endsWith('/portfolio');
+  const file = path.split('/').pop() || '';
+  return (
+    file === '' ||
+    file === 'index.html' ||
+    file === 'home.html' ||
+    path.endsWith('/portfolio/') ||
+    path.endsWith('/portfolio')
+  );
 }
 
 function scrollToSection(sectionId, behavior = 'smooth') {

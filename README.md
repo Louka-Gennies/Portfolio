@@ -29,16 +29,18 @@ Bienvenue sur le dépôt de mon portfolio personnel ! Ce projet met en avant mes
 
 ## 💻 Développement local
 
-La page d'accueil (`home.html`) charge **Three.js en modules ES** (`import` / `type="module"`). Les navigateurs **refusent** ces imports quand le fichier est ouvert en `file://` (double-clic sur le HTML) — d'où l'erreur CORS *"request not http"*.
+La page d'accueil (`index.html`) charge **Three.js en modules ES** (`import` / `type="module"`). Les navigateurs **refusent** ces imports quand le fichier est ouvert en `file://` (double-clic sur le HTML) — d'où l'erreur CORS *"request not http"*.
 
-**Ne pas ouvrir `home.html` directement.** Servir le dossier `Portfolio` en HTTP :
+**Ne pas ouvrir `index.html` directement.** Servir le dossier `Portfolio` en HTTP :
 
 ```bash
 cd Portfolio
 npm run dev
 ```
 
-Puis ouvrir [http://localhost:5500/home.html](http://localhost:5500/home.html).
+Puis ouvrir [http://localhost:5500/](http://localhost:5500/) (ou `index.html`).
+
+**GitHub Pages :** la racine du site doit servir `index.html` (page d'accueil du portfolio).
 
 Sans npm : `npx --yes serve -l 5500` depuis le dossier `Portfolio`, ou l'extension **Live Server** de VS Code sur ce dossier.
 
