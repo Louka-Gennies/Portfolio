@@ -127,6 +127,19 @@ async function handleGateSubmit(event) {
   }
 }
 
+function updatePasswordDisplay() {
+  const el = document.getElementById('books-gate-password-display');
+  const valueEl = el?.querySelector('.books-gate-password-value');
+  const password = (window.BOOK_ACCESS_DISPLAY || '').trim();
+  if (!el || !valueEl) return;
+  if (!password) {
+    el.hidden = true;
+    return;
+  }
+  valueEl.textContent = password;
+  el.hidden = false;
+}
+
 function initBookAccess() {
   const form = document.getElementById('books-gate-form');
   form?.addEventListener('submit', handleGateSubmit);
@@ -137,6 +150,7 @@ function initBookAccess() {
     document.getElementById('books-gate')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
+  updatePasswordDisplay();
   updateUI();
 }
 
@@ -148,6 +162,7 @@ window.portfolioBookAccess = {
   isConfigured,
   lockSession,
   updateUI,
+  updatePasswordDisplay,
   async hashPassword(password) {
     const hash = await sha256(password);
     console.log('Ajoutez dans src/js/book-access.config.js :\nwindow.BOOK_ACCESS_SHA256 = "' + hash + '";');
