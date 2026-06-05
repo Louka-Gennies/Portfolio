@@ -128,7 +128,7 @@ const translations = {
     'books.gate.wrongPassword': 'Mot de passe incorrect.',
     'books.gate.notConfigured':
       'Protection non configurée. Copiez book-access.config.example.js en book-access.config.js et définissez un mot de passe.',
-    'books.gate.hint': 'Besoin d\'un accès ? Contactez-moi via la page d\'accueil.',
+    'books.gate.hint': 'Besoin d\'un accès ? Contactez-moi via la page d\'accueil. Mdp : Louka-Gennies-2026',
   },
   en: {
     'nav.home': 'Home',
@@ -259,7 +259,7 @@ const translations = {
     'books.gate.wrongPassword': 'Incorrect password.',
     'books.gate.notConfigured':
       'Protection not configured. Copy book-access.config.example.js to book-access.config.js and set a password.',
-    'books.gate.hint': 'Need access? Contact me from the home page.',
+    'books.gate.hint': 'Need access? Contact me from the home page. Pwd : Louka-Gennies-2026',
   },
 };
 
